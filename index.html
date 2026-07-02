@@ -3194,11 +3194,41 @@ index
 
 function submitExam(){
 
+let checked =
+
+document.querySelectorAll(
+'input[name="ans"]:checked'
+);
+
+if(checked.length==1){
+
+window.studentAnswers[
+window.currentQuestion
+] = checked[0].value;
+
+}
+
+else if(checked.length>1){
+
+let arr=[];
+
+checked.forEach(x=>{
+
+arr.push(x.value);
+
+});
+
+window.studentAnswers[
+window.currentQuestion
+] = arr.join(',');
+
+}
+
 let answered = 0;
 
 for(
 let i=0;
-i<window.studentAnswers.length;
+i<window.examQuestions.length;
 i++
 ){
 
@@ -3243,20 +3273,6 @@ notAnswered +
 if(!confirmSubmit){
 
 return;
-
-}
-
-let selected =
-
-document.querySelector(
-'input[name="ans"]:checked'
-);
-
-if(selected){
-
-window.studentAnswers[
-window.currentQuestion
-] = selected.value;
 
 }
 
@@ -3399,153 +3415,138 @@ showResultPage();
 
 function showResultPage(){
 
-let r =
-window.examResult;
+let r = window.examResult;
 
-document.body.innerHTML = `
+document.getElementById('contentArea').innerHTML = `
 
-<div style="padding:20px">
+<div style="
+max-width:650px;
+margin:10px auto;
+padding:16px;
+">
 
-<h2>
-Exam Result
-</h2>
+<div style="
+background:#1e293b;
+border:1px solid #334155;
+border-radius:22px;
+padding:24px 18px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+text-align:center;
+">
 
-<p>
+<div style="
+font-size:20px;
+color:#c4b5fd;
+font-weight:700;
+margin-bottom:8px;
+">
+Exam Completed
+</div>
 
-<b>Exam No:</b>
-
-${window.currentExamNo}
-
-</p>
-
-<p>
-
-<b>Exam Name:</b>
-
+<h1 style="
+font-size:30px;
+color:#8b5cf6;
+margin-bottom:8px;
+">
 ${window.currentExamName}
+</h1>
 
+<p style="
+color:#cbd5e1;
+margin-bottom:22px;
+">
+Exam No: ${window.currentExamNo}
 </p>
 
-<hr>
+<div style="
+background:#0f172a;
+border-radius:18px;
+padding:20px;
+margin-bottom:20px;
+">
 
-<hr>
-
-<p>
-<b>Student ID:</b>
-${r.studentId}
-</p>
-
-<p>
-<b>Student Name:</b>
-${r.studentName}
-</p>
-
-<p>
-<b>Total Question:</b>
-${r.total}
-</p>
-
-<p>
-<b>Answered:</b>
-${r.answered}
-</p>
-
-<p>
-<b>Correct:</b>
-${r.correct}
-</p>
-
-<p>
-<b>Wrong:</b>
-${r.wrong}
-</p>
-
-<p>
-<b>Percentage:</b>
+<div style="
+font-size:52px;
+font-weight:900;
+color:#a78bfa;
+line-height:1;
+">
 ${r.percentage}%
+</div>
+
+<p style="
+color:#94a3b8;
+margin-top:8px;
+">
+Your Score: ${r.correct} / ${r.total}
 </p>
 
-<hr>
+</div>
 
-<div id="reviewArea"></div>
+<div style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+text-align:left;
+">
+
+<div style="
+background:#0f172a;
+border-radius:12px;
+padding:13px;
+">
+<span style="color:#94a3b8;">Answered</span>
+<br>
+<b style="font-size:22px;">${r.answered}</b>
+</div>
+
+<div style="
+background:#0f172a;
+border-radius:12px;
+padding:13px;
+">
+<span style="color:#94a3b8;">Correct</span>
+<br>
+<b style="font-size:22px;color:#86efac;">${r.correct}</b>
+</div>
+
+<div style="
+background:#0f172a;
+border-radius:12px;
+padding:13px;
+">
+<span style="color:#94a3b8;">Wrong</span>
+<br>
+<b style="font-size:22px;color:#fca5a5;">${r.wrong}</b>
+</div>
+
+<div style="
+background:#0f172a;
+border-radius:12px;
+padding:13px;
+">
+<span style="color:#94a3b8;">Not Answered</span>
+<br>
+<b style="font-size:22px;color:#fcd34d;">${r.total-r.answered}</b>
+</div>
+
+</div>
+
+<button
+style="
+width:100%;
+margin-top:22px;
+font-size:16px;
+"
+onclick="showStudentDashboard()">
+Back To Dashboard
+</button>
+
+</div>
 
 </div>
 
 `;
-
-let html='';
-
-for(
-
-let i=0;
-
-i<window.examQuestions.length;
-
-i++
-
-){
-
-let q =
-window.examQuestions[i];
-
-let userAns =
-window.studentAnswers[i] || 'Not Answered';
-
-let correctAns =
-q.correctAnswer;
-
-let resultMark =
-
-userAns.toUpperCase() ==
-correctAns.toUpperCase()
-
-?
-
-'✅ Correct'
-
-:
-
-'❌ Wrong';
-
-html += '<hr>';
-
-html += '<h3>';
-
-html += 'Q' + (i+1) + '. ';
-
-html += q.question;
-
-html += '</h3>';
-
-html += '<p>a. ' + q.optionA + '</p>';
-
-html += '<p>b. ' + q.optionB + '</p>';
-
-html += '<p>c. ' + q.optionC + '</p>';
-
-html += '<p>d. ' + q.optionD + '</p>';
-
-html += '<br>';
-
-html += '<b>Your Answer : </b>';
-
-html += userAns;
-
-html += '<br>';
-
-html += '<b>Correct Answer : </b>';
-
-html += correctAns;
-
-html += '<br><br>';
-
-html += resultMark;
-
-}
-
-document.getElementById(
-'reviewArea'
-).innerHTML = html;
 
 }
 
