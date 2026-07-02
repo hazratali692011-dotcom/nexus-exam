@@ -1232,6 +1232,18 @@ type="number"
 id="duration"
 placeholder="Duration (Minutes)">
 
+<select id="examCategory">
+
+<option value="FREE">
+FREE Exam
+</option>
+
+<option value="PAID">
+PAID Exam
+</option>
+
+</select>
+
 <button onclick="createExam()">
 Save Exam
 </button>
@@ -1272,6 +1284,11 @@ document.getElementById(
 'duration'
 ).value.trim();
 
+let examCategory =
+document.getElementById(
+'examCategory'
+).value;
+
 if(
 
 !examNo ||
@@ -1310,7 +1327,9 @@ totalQuestion:totalQuestion,
 
 totalMark:totalMark,
 
-duration:duration
+duration:duration,
+
+examCategory:examCategory
 
 })
 
