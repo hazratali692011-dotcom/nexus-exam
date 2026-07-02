@@ -1,0 +1,3499 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>🩺 Nursing Exam Pro</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:#fff;
+min-height:100vh;
+}
+
+.header{
+
+background:#312e81;
+
+padding:15px;
+
+text-align:center;
+
+border-bottom:2px solid #6b705c;
+
+box-shadow:
+0 4px 15px rgba(0,0,0,.25);
+
+}
+
+.brand-main{
+
+font-size:48px;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+background:linear-gradient(
+90deg,
+#60a5fa,
+#8b5cf6,
+#c084fc
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+0 0 20px rgba(139,92,246,.6);
+
+filter:drop-shadow(0 0 20px #c084fc);
+
+}
+
+.brand-sub{
+
+font-size:20px;
+
+color:#e9d5ff;
+
+font-weight:600;
+
+letter-spacing:1px;
+
+text-shadow:
+0 0 8px #c084fc;
+
+}
+
+.brand-sub{
+
+font-size:20px;
+
+color:#c4b5fd;
+
+letter-spacing:1px;
+
+font-weight:500;
+
+}
+
+
+.card{
+max-width:500px;
+margin:30px auto;
+background:#1e293b;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+border:1px solid #334155;
+}
+
+.card h2{
+color:#8b5cf6;
+margin-bottom:20px;
+text-align:center;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+background:#0f172a;
+border:1px solid #334155;
+border-radius:10px;
+color:white;
+font-size:15px;
+}
+
+input[type="radio"],
+input[type="checkbox"]{
+width:auto;
+margin-right:8px;
+}
+
+button{
+background:#8b5cf6;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+transition:.3s;
+}
+
+button:hover{
+background:#7c3aed;
+transform:translateY(-2px);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+table th{
+background:#8b5cf6;
+color:white;
+padding:10px;
+}
+
+table td{
+padding:10px;
+border:1px solid #334155;
+background:#1e293b;
+}
+
+hr{
+border:none;
+border-top:1px solid #334155;
+margin:15px 0;
+}
+
+.footer{
+text-align:center;
+color:#94a3b8;
+margin-top:10px;
+}
+
+.layout{
+display:flex;
+min-height:calc(100vh - 90px);
+}
+
+.sidebar{
+
+width:260px;
+
+background:#1e1b4b;
+
+padding:20px;
+
+border-right:2px solid #a5a58d;
+
+box-shadow:
+0 0 20px rgba(0,0,0,.3);
+
+}
+
+.sidebar h2{
+color:#8b5cf6;
+margin-bottom:20px;
+}
+
+.sidebar button{
+width:100%;
+margin-bottom:10px;
+}
+
+.content{
+flex:1;
+padding:30px;
+}
+
+.card{
+
+background:#1e293b;
+
+padding:25px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:
+0 0 20px rgba(139,92,246,.25);
+
+}
+
+.card h2{
+
+color:#8b5cf6;
+
+font-size:32px;
+
+margin-bottom:10px;
+
+}
+.welcome-box{
+text-align:center;
+margin-top:20px;
+}
+
+.welcome-box h1{
+font-size:58px;
+font-weight:800;
+color:#8b5cf6;
+margin-bottom:10px;
+text-shadow:0 0 20px #8b5cf6;
+}
+
+.welcome-box h3{
+color:white;
+margin-bottom:20px;
+}
+
+.welcome-box p{
+color:#94a3b8;
+font-size:18px;
+}
+
+.blink-text{
+margin-top:30px;
+font-size:22px;
+font-weight:bold;
+color:#8b5cf6;
+animation:blink 1.5s infinite;
+}
+
+@keyframes blink{
+
+0%{
+opacity:1;
+}
+
+50%{
+opacity:.3;
+}
+
+100%{
+opacity:1;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<span class="brand-main">
+  NEXUS
+</span>
+
+<br>
+
+<span class="brand-sub">
+Nursing Examination Portal
+</span>
+
+</div>
+
+<div class="layout">
+
+<div class="sidebar">
+
+<h2 style="
+font-size:32px;
+text-align:center;
+margin-bottom:10px;
+">
+🩺 NEXUS
+</h2>
+
+<p style="
+text-align:center;
+color:#94a3b8;
+margin-bottom:30px;
+font-size:13px;
+">
+Nursing Examination Portal
+</p>
+
+<button onclick="showRegisterForm()">
+Student Register
+</button>
+
+<button onclick="showLoginForm()">
+Student Login
+</button>
+
+<button onclick="showAdminForm()">
+Admin Login
+</button>
+
+</div>
+
+<div id="contentArea" class="content">
+
+<div class="welcome-box">
+
+<img
+src="logo.png"
+style="
+width:500px;
+max-width:90%;
+margin-top:-20px;
+margin-bottom:10px;
+filter:drop-shadow(0 0 25px #8b5cf6);
+">
+
+<h1>
+Welcome To NEXUS
+</h1>
+
+<h3>
+Nursing Examination Portal
+</h3>
+
+<p>
+Online Examination, Result Analysis,
+Student Management & Assessment System
+</p>
+
+<div class="blink-text">
+
+✨ Smart • Secure • Professional ✨
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<hr style="margin:20px 0;">
+
+</div>
+
+<script>
+
+const scriptURL =
+'https://script.google.com/macros/s/AKfycbwXiHHfzDIH8dOvmutb-e4qLGwNDXs9J2Tyt5EPh8Ko3-EsZo2B4iay_ikahxDsnMG15w/exec';
+
+function showRegisterForm(){
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div class="card">
+
+<h2>Student Registration</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="text" id="phone" placeholder="Mobile Number">
+
+<input type="email" id="email" placeholder="Email Address">
+
+<input type="text" id="course" placeholder="Course">
+
+<input type="text" id="institute" placeholder="Institute Name">
+
+<input type="text" id="batch" placeholder="Batch">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="registerStudent()">
+Register Now
+</button>
+
+</div>
+
+`;
+
+}
+
+function showLoginForm(){
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div class="card">
+
+<h2>Student Login</h2>
+
+<input
+type="text"
+id="loginId"
+placeholder="Student ID">
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password">
+
+<button onclick="loginStudent()">
+Login
+</button>
+
+</div>
+
+`;
+
+}
+
+function showAdminForm(){
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div class="card">
+
+<h2>Admin Login</h2>
+
+<input
+type="text"
+id="adminId"
+placeholder="Admin ID">
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Password">
+
+<button onclick="adminLogin()">
+Admin Login
+</button>
+
+</div>
+
+`;
+
+}
+
+
+
+function registerStudent(){
+
+let name =
+document.getElementById('name').value.trim();
+
+let phone =
+document.getElementById('phone').value.trim();
+
+let email =
+document.getElementById('email').value.trim();
+
+let course =
+document.getElementById('course').value.trim();
+
+let institute =
+document.getElementById('institute').value.trim();
+
+let batch =
+document.getElementById('batch').value.trim();
+
+let password =
+document.getElementById('password').value.trim();
+
+if(
+!name ||
+!phone ||
+!email ||
+!course ||
+!institute ||
+!batch ||
+!password
+){
+
+alert('Please Fill All Fields');
+
+return;
+
+}
+
+let studentId =
+
+'STD' +
+
+String(
+Date.now()
+).slice(-4);
+
+let data={
+
+action:'register',
+
+id:studentId,
+
+name:name,
+
+phone:phone,
+
+email:email,
+
+course:course,
+
+institute:institute,
+
+batch:batch,
+
+password:password
+
+};
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify(data)
+
+})
+
+.then(r=>r.text())
+
+.then(()=>{
+
+localStorage.setItem(
+'studentId',
+studentId
+);
+
+alert(
+
+'Registration Successful\n\nYour ID : '
+
++
+
+studentId +
+
+'\n\nPlease Save This ID'
+
+);
+
+document.getElementById('name').value='';
+document.getElementById('phone').value='';
+document.getElementById('email').value='';
+document.getElementById('course').value='';
+document.getElementById('institute').value='';
+document.getElementById('batch').value='';
+document.getElementById('password').value='';
+
+document.getElementById(
+'loginId'
+).value = studentId;
+
+document.getElementById(
+'loginPassword'
+).value = '';
+
+})
+
+.catch(()=>{
+
+alert(
+'Server Error'
+);
+
+});
+
+}
+
+function loginStudent(){
+
+let id =
+document.getElementById(
+'loginId'
+).value.trim();
+
+let password =
+document.getElementById(
+'loginPassword'
+).value.trim();
+
+if(!id || !password){
+
+alert('Enter ID & Password');
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'login',
+
+id:id,
+
+password:password
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status==='SUCCESS'){
+
+localStorage.setItem(
+'studentData',
+JSON.stringify(data)
+);
+
+alert(
+'Login Successful'
+);
+
+showStudentDashboard();
+
+}else{
+
+alert(
+'Wrong ID Or Password'
+);
+
+}
+
+})
+
+.catch(()=>{
+
+alert(
+'Server Error'
+);
+
+});
+
+}
+
+function adminLogin(){
+
+let id =
+document.getElementById(
+'adminId'
+).value.trim();
+
+let password =
+document.getElementById(
+'adminPassword'
+).value.trim();
+
+if(!id || !password){
+
+alert(
+'Enter Admin ID & Password'
+);
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'adminLogin',
+
+id:id,
+
+password:password
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status=='SUCCESS'){
+
+localStorage.setItem(
+'adminLogin',
+'YES'
+);
+
+showAdminDashboard();
+
+}else{
+
+alert(
+'Wrong Admin ID Or Password'
+);
+
+}
+
+})
+
+.catch(()=>{
+
+alert(
+'Server Error'
+);
+
+});
+
+}
+
+function logoutAdmin(){
+
+localStorage.removeItem(
+'adminLogin'
+);
+
+location.reload();
+
+}
+
+function loadStudents(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getStudents'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h3>Student List</h3>';
+
+html += '<table border="1" width="100%">';
+
+html += '<tr>';
+
+html += '<th>ID</th>';
+html += '<th>Name</th>';
+html += '<th>Phone</th>';
+html += '<th>Email</th>';
+html += '<th>Status</th>';
+html += '<th>Action</th>';
+html += '</tr>';
+
+rows.forEach(r=>{
+
+html += '<tr>';
+
+html += '<td>'+r.id+'</td>';
+
+html += '<td>'+r.name+'</td>';
+
+html += '<td>'+r.phone+'</td>';
+
+html += '<td>'+r.email+'</td>';
+
+html += '<td>'+r.status+'</td>';
+
+html += '<td>';html += '<td>';
+
+html += '<button onclick="viewStudent(\''+r.id+'\')">Profile</button> ';
+
+if(r.status=='ACTIVE'){
+
+html += '<button onclick="blockStudent(\''+r.id+'\')">Block</button>';
+
+}else{
+
+html += '<button onclick="unblockStudent(\''+r.id+'\')">Unblock</button>';
+
+}
+
+html += '</td>';
+
+html += '</tr>';
+
+});
+
+html += '</table>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html;
+
+});
+
+}
+
+
+function viewStudent(id){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getStudents'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let student = rows.find(
+x => x.id == id
+);
+
+if(!student){
+return;
+}
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+
+<div class="card">
+
+<h2>Student Profile</h2>
+
+<p><b>Name:</b> ${student.name}</p>
+
+<p><b>ID:</b> ${student.id}</p>
+
+<p><b>Phone:</b> ${student.phone}</p>
+
+<p><b>Email:</b> ${student.email}</p>
+
+<p><b>Course:</b> ${student.course}</p>
+
+<p><b>Institute:</b> ${student.institute}</p>
+
+<p><b>Batch:</b> ${student.batch}</p>
+
+<p><b>Status:</b> ${student.status}</p>
+
+<br>
+
+<button onclick="loadStudents()">
+Back To List
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function blockStudent(id){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'blockStudent',
+
+id:id
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert('Student Blocked');
+
+loadStudents();
+
+});
+
+}
+
+function unblockStudent(id){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'unblockStudent',
+
+id:id
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert('Student Activated');
+
+loadStudents();
+
+});
+
+}
+
+function showCreateExamForm(){
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+
+<h3>Create Exam</h3>
+
+<input
+type="text"
+id="examNo"
+placeholder="Exam No">
+
+<input
+type="text"
+id="examName"
+placeholder="Exam Name">
+
+<input
+type="number"
+id="totalQuestion"
+placeholder="Total Questions">
+
+<input
+type="number"
+id="totalMark"
+placeholder="Total Marks">
+
+<input
+type="number"
+id="duration"
+placeholder="Duration (Minutes)">
+
+<button onclick="createExam()">
+Save Exam
+</button>
+<br><br>
+
+<button onclick="loadExams()">
+View Exams
+</button>
+`;
+
+}
+
+
+function createExam(){
+
+let examNo =
+document.getElementById(
+'examNo'
+).value.trim();
+
+let examName =
+document.getElementById(
+'examName'
+).value.trim();
+
+let totalQuestion =
+document.getElementById(
+'totalQuestion'
+).value.trim();
+
+let totalMark =
+document.getElementById(
+'totalMark'
+).value.trim();
+
+let duration =
+document.getElementById(
+'duration'
+).value.trim();
+
+if(
+
+!examNo ||
+
+!examName ||
+
+!totalQuestion ||
+
+!totalMark ||
+
+!duration
+
+){
+
+alert(
+'Fill All Fields'
+);
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'createExam',
+
+examNo:examNo,
+
+examName:examName,
+
+totalQuestion:totalQuestion,
+
+totalMark:totalMark,
+
+duration:duration
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+console.log(data);
+
+alert(
+JSON.stringify(data)
+);
+
+if(data.status=='SUCCESS'){
+
+alert(
+'Exam Created Successfully'
+);
+
+showCreateExamForm();
+
+}
+
+})
+
+.catch(error=>{
+
+console.log(error);
+
+alert(
+'ERROR : ' + error
+);
+
+});
+
+}
+
+function loadExams(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getExams'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h3>Exam List</h3>';
+
+html += '<table border="1" width="100%">';
+
+html += '<tr>';
+
+html += '<th>Exam No</th>';
+
+html += '<th>Exam Name</th>';
+
+html += '<th>Questions</th>';
+
+html += '<th>Marks</th>';
+
+html += '<th>Duration</th>';
+
+html += '<th>Status</th>';
+html += '<th>Action</th>';
+
+html += '</tr>';
+
+rows.forEach(r=>{
+
+html += '<tr>';
+
+html += '<td>'+r.examNo+'</td>';
+
+html += '<td>'+r.examName+'</td>';
+
+html += '<td>'+r.totalQuestion+'</td>';
+
+html += '<td>'+r.totalMark+'</td>';
+
+html += '<td>'+r.duration+'</td>';
+
+html += '<td>'+r.status+'</td>';
+html += '<td>';
+
+html += '<button onclick="deleteExam(\''+r.examNo+'\')">Delete</button>';
+
+html += '</td>';
+
+html += '</tr>';
+
+});
+
+html += '</table>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html;
+
+});
+
+}
+
+function deleteExam(examNo){
+
+if(
+
+!confirm(
+
+'Delete This Exam?'
+
+)
+
+){
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'deleteExam',
+
+examNo:examNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert(
+
+'Exam Deleted'
+
+);
+
+loadExams();
+
+});
+
+}
+
+function showQuestionBank(){
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+<div style="
+text-align:center;
+">
+<h3>Add Question</h3><br>
+
+<button onclick="showManualQuestion()">
+Manual MCQ
+</button>
+
+<br><br>
+
+<button onclick="showManualTrueFalse()">
+Manual True/False
+</button>
+
+<br><br>
+
+<button onclick="showMcqParser()">
+Auto MCQ
+</button>
+
+<br><br>
+
+<button onclick="showTfParser()">
+Auto True/False
+</button>
+
+
+
+<br><br>
+
+<button onclick="showTfParser()">
+True / False Format
+</button>
+<br><br>
+
+<button onclick="loadQuestions()">
+View Questions
+</button>
+</div>
+
+<hr style="margin:15px 0;">
+<input
+type="text"
+id="qExamNo"
+placeholder="Exam No">
+
+<input
+type="text"
+id="question"
+placeholder="Question">
+
+<input
+type="text"
+id="optionA"
+placeholder="Option A">
+
+<input
+type="text"
+id="optionB"
+placeholder="Option B">
+
+<input
+type="text"
+id="optionC"
+placeholder="Option C">
+
+<input
+type="text"
+id="optionD"
+placeholder="Option D">
+
+<input
+type="text"
+id="correctAnswer"
+placeholder="Correct Answer">
+
+<button onclick="saveQuestion()">
+Save Question
+</button>
+
+`;
+
+}
+
+function showManualQuestion(){
+
+showQuestionBank();
+
+}
+
+function showManualTrueFalse(){
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+
+<h3>Manual True/False</h3>
+
+<input
+type="text"
+id="tfExamNo"
+placeholder="Exam No">
+
+<input
+type="text"
+id="tfQuestion"
+placeholder="Question">
+
+<input
+type="text"
+id="tfA"
+placeholder="Statement A">
+
+<input
+type="text"
+id="tfB"
+placeholder="Statement B">
+
+<input
+type="text"
+id="tfC"
+placeholder="Statement C">
+
+<input
+type="text"
+id="tfD"
+placeholder="Statement D">
+
+<input
+type="text"
+id="tfE"
+placeholder="Statement E">
+
+<input
+type="text"
+id="tfAnswer"
+placeholder="True Answer (A,C,D)">
+
+<button onclick="saveTrueFalseQuestion()">
+Save True/False
+</button>
+
+`;
+
+}
+
+function saveTrueFalseQuestion(){
+
+let examNo =
+document.getElementById(
+'tfExamNo'
+).value.trim();
+
+let question =
+document.getElementById(
+'tfQuestion'
+).value.trim();
+
+let optionA =
+document.getElementById(
+'tfA'
+).value.trim();
+
+let optionB =
+document.getElementById(
+'tfB'
+).value.trim();
+
+let optionC =
+document.getElementById(
+'tfC'
+).value.trim();
+
+let optionD =
+document.getElementById(
+'tfD'
+).value.trim();
+
+let optionE =
+document.getElementById(
+'tfE'
+).value.trim();
+
+let correctAnswer =
+document.getElementById(
+'tfAnswer'
+).value.trim();
+
+if(
+
+!examNo ||
+
+!question ||
+
+!optionA ||
+
+!optionB ||
+
+!optionC ||
+
+!optionD ||
+
+!optionE ||
+
+!correctAnswer
+
+){
+
+alert(
+'Fill All Fields'
+);
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'addQuestion',
+
+questionType:'TRUE_FALSE',
+
+examNo:examNo,
+
+question:question,
+
+optionA:optionA,
+
+optionB:optionB,
+
+optionC:optionC,
+
+optionD:optionD,
+
+optionE:optionE,
+
+correctAnswer:correctAnswer
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status=='SUCCESS'){
+
+alert(
+'True/False Saved'
+);
+
+showManualTrueFalse();
+
+}
+
+});
+
+}
+
+function showMcqParser(){
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+
+<h3>MCQ Auto Format</h3>
+
+<textarea
+id="mcqText"
+style="
+width:100%;
+height:250px;
+padding:10px;
+"
+placeholder="Paste MCQ Here">
+</textarea>
+
+<button onclick="parseMcq()">
+Convert MCQ
+</button>
+
+<div id="mcqResult"></div>
+
+`;
+
+}
+
+function parseMcq(){
+
+let text =
+document.getElementById(
+'mcqText'
+).value.trim();
+
+if(!text){
+
+alert(
+'Paste MCQ First'
+);
+
+return;
+
+}
+
+let lines =
+text.split('\n')
+.filter(x=>x.trim());
+
+let question='';
+
+let optionA='';
+let optionB='';
+let optionC='';
+let optionD='';
+
+let answer='';
+
+lines.forEach(line=>{
+
+line=line.trim();
+
+if(
+line.startsWith('a.')
+){
+
+optionA =
+line.replace('a.','').trim();
+
+}
+
+else if(
+line.startsWith('b.')
+){
+
+optionB =
+line.replace('b.','').trim();
+
+}
+
+else if(
+line.startsWith('c.')
+){
+
+optionC =
+line.replace('c.','').trim();
+
+}
+
+else if(
+line.startsWith('d.')
+){
+
+optionD =
+line.replace('d.','').trim();
+
+}
+
+else if(
+line.toLowerCase()
+.includes('correct ans')
+){
+
+let parts =
+line.split(':');
+
+if(parts.length>1){
+
+answer =
+parts[1]
+.trim()
+.charAt(0)
+.toUpperCase();
+
+}
+
+}
+
+else{
+
+if(
+!question &&
+!line.match(/^\d+\./)
+){
+
+question=line;
+
+}
+
+if(
+line.match(/^\d+\./)
+){
+
+question=line
+.replace(/^\d+\./,'')
+.trim();
+
+}
+
+}
+
+});
+
+document.getElementById(
+'mcqResult'
+).innerHTML = `
+
+<hr>
+
+<h3>Parsed Result</h3>
+
+<p><b>Question:</b> ${question}</p>
+
+<p><b>A:</b> ${optionA}</p>
+
+<p><b>B:</b> ${optionB}</p>
+
+<p><b>C:</b> ${optionC}</p>
+
+<p><b>D:</b> ${optionD}</p>
+
+<p><b>Answer:</b> ${answer}</p>
+
+<button onclick="saveParsedMcq(
+'${question.replace(/'/g,"\\'")}',
+'${optionA.replace(/'/g,"\\'")}',
+'${optionB.replace(/'/g,"\\'")}',
+'${optionC.replace(/'/g,"\\'")}',
+'${optionD.replace(/'/g,"\\'")}',
+'${answer}'
+)">
+Save Parsed MCQ
+</button>
+
+`;
+
+}
+
+
+function saveParsedMcq(
+question,
+optionA,
+optionB,
+optionC,
+optionD,
+answer
+){
+
+let examNo =
+prompt(
+'Enter Exam No'
+);
+
+if(!examNo){
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'addQuestion',
+
+questionType:'MCQ',
+
+examNo:examNo,
+
+question:question,
+
+optionA:optionA,
+
+optionB:optionB,
+
+optionC:optionC,
+
+optionD:optionD,
+
+optionE:'',
+
+correctAnswer:answer
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status=='SUCCESS'){
+
+alert(
+'MCQ Saved Successfully'
+);
+
+}
+
+});
+
+}
+
+function showTfParser(){
+
+document.getElementById(
+'studentArea'
+).innerHTML = `
+
+<h3>True / False Auto Format</h3>
+
+<textarea
+id="tfText"
+style="
+width:100%;
+height:250px;
+padding:10px;
+"
+placeholder="Paste True False Question Here">
+</textarea>
+
+<button onclick="parseTf()">
+Convert True False
+</button>
+<div id="tfResult"></div>
+
+`;
+
+}
+
+function parseTf(){
+
+let text =
+document.getElementById(
+'tfText'
+).value.trim();
+
+if(!text){
+
+alert(
+'Paste True/False First'
+);
+
+return;
+
+}
+
+let lines =
+text.split('\n')
+.filter(x=>x.trim());
+
+let question='';
+
+let optionA='';
+let optionB='';
+let optionC='';
+let optionD='';
+let optionE='';
+
+let answer='';
+
+lines.forEach(line=>{
+
+line=line.trim();
+
+if(
+line.startsWith('a.')
+){
+
+optionA =
+line.replace('a.','').trim();
+
+}
+
+else if(
+line.startsWith('b.')
+){
+
+optionB =
+line.replace('b.','').trim();
+
+}
+
+else if(
+line.startsWith('c.')
+){
+
+optionC =
+line.replace('c.','').trim();
+
+}
+
+else if(
+line.startsWith('d.')
+){
+
+optionD =
+line.replace('d.','').trim();
+
+}
+
+else if(
+line.startsWith('e.')
+){
+
+optionE =
+line.replace('e.','').trim();
+
+}
+
+else if(
+line.toLowerCase()
+.includes('true ans')
+){
+
+let parts =
+line.split(':');
+
+if(parts.length>1){
+
+answer =
+parts[1]
+.trim()
+.toUpperCase();
+
+}
+
+}
+
+else{
+
+if(
+line.match(/^\d+\./)
+){
+
+question =
+line.replace(/^\d+\./,'')
+.trim();
+
+}
+
+}
+
+});
+
+document.getElementById(
+'tfResult'
+).innerHTML = `
+
+<hr>
+
+<h3>Parsed Result</h3>
+
+<p><b>Question:</b> ${question}</p>
+
+<p><b>A:</b> ${optionA}</p>
+
+<p><b>B:</b> ${optionB}</p>
+
+<p><b>C:</b> ${optionC}</p>
+
+<p><b>D:</b> ${optionD}</p>
+
+<p><b>E:</b> ${optionE}</p>
+
+<p><b>Answer:</b> ${answer}</p>
+
+<button onclick="saveParsedTf(
+'${question.replace(/'/g,"\\'")}',
+'${optionA.replace(/'/g,"\\'")}',
+'${optionB.replace(/'/g,"\\'")}',
+'${optionC.replace(/'/g,"\\'")}',
+'${optionD.replace(/'/g,"\\'")}',
+'${optionE.replace(/'/g,"\\'")}',
+'${answer}'
+)">
+Save Parsed True/False
+</button>
+
+`;
+
+}
+
+
+function saveParsedTf(
+question,
+optionA,
+optionB,
+optionC,
+optionD,
+optionE,
+answer
+){
+
+let examNo =
+prompt(
+'Enter Exam No'
+);
+
+if(!examNo){
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'addQuestion',
+
+questionType:'TRUE_FALSE',
+
+examNo:examNo,
+
+question:question,
+
+optionA:optionA,
+
+optionB:optionB,
+
+optionC:optionC,
+
+optionD:optionD,
+
+optionE:optionE,
+
+correctAnswer:answer
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status=='SUCCESS'){
+
+alert(
+'True/False Saved Successfully'
+);
+
+}
+
+});
+
+}
+
+function saveQuestion(){
+
+let examNo =
+document.getElementById(
+'qExamNo'
+).value.trim();
+
+let question =
+document.getElementById(
+'question'
+).value.trim();
+
+let optionA =
+document.getElementById(
+'optionA'
+).value.trim();
+
+let optionB =
+document.getElementById(
+'optionB'
+).value.trim();
+
+let optionC =
+document.getElementById(
+'optionC'
+).value.trim();
+
+let optionD =
+document.getElementById(
+'optionD'
+).value.trim();
+
+let correctAnswer =
+document.getElementById(
+'correctAnswer'
+).value.trim();
+
+if(
+
+!examNo ||
+
+!question ||
+
+!optionA ||
+
+!optionB ||
+
+!optionC ||
+
+!optionD ||
+
+!correctAnswer
+
+){
+
+alert(
+'Fill All Fields'
+);
+
+return;
+
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'addQuestion',
+questionType:'MCQ',
+
+examNo:examNo,
+
+question:question,
+
+optionA:optionA,
+
+optionB:optionB,
+
+optionC:optionC,
+
+optionD:optionD,
+optionE:'',
+correctAnswer:correctAnswer
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status=='SUCCESS'){
+
+alert(
+'Question Saved'
+);
+
+showQuestionBank();
+
+}
+
+});
+
+}
+
+function loadQuestions(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getAllQuestions'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h2>Question List</h2>';
+
+html += '<table border="1" width="100%">';
+
+html += '<tr>';
+
+html += '<th>Exam</th>';
+
+html += '<th>Type</th>';
+
+html += '<th>Question</th>';
+
+html += '<th>Answer</th>';
+
+html += '<th>Action</th>';
+
+html += '</tr>';
+
+rows.forEach(r=>{
+
+html += '<tr>';
+
+html += '<td>'+r.examNo+'</td>';
+
+html += '<td>'+r.questionType+'</td>';
+
+html += '<td>'+r.question+'</td>';
+
+html += '<td>'+r.correctAnswer+'</td>';
+
+html += '<td>';
+
+html += '<button onclick="deleteQuestion('+r.rowNo+')">Delete</button>';
+
+html += '</td>';
+
+html += '</tr>';
+
+});
+
+html += '</table>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html;
+
+});
+
+}
+
+function deleteQuestion(rowNo){
+
+if(
+!confirm(
+'Delete This Question?'
+)
+){
+return;
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'deleteQuestion',
+
+rowNo:rowNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert(
+'Question Deleted'
+);
+
+loadQuestions();
+
+});
+
+}
+
+function showResults(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getAllResults'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h2>All Results</h2>';
+
+html += '<table border="1" width="100%">';
+
+html += '<tr>';
+
+html += '<th>Student</th>';
+
+html += '<th>Exam</th>';
+
+html += '<th>Score</th>';
+
+html += '<th>%</th>';
+
+html += '</tr>';
+
+rows.forEach(r=>{
+
+html += '<tr>';
+
+html += '<td>'+r.studentName+'</td>';
+
+html += '<td>'+r.examName+'</td>';
+
+html += '<td>'+r.score+'</td>';
+
+html += '<td>'+r.percentage+'%</td>';
+
+html += '</tr>';
+
+});
+
+html += '</table>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html;
+
+});
+
+}
+
+function showAdminDashboard(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getDashboardStats'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(stats=>{
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div style="
+padding:20px;
+">
+
+<h1 style="
+color:#8b5cf6;
+text-align:center;
+margin-bottom:30px;
+">
+Admin Dashboard
+</h1>
+
+<div style="
+display:grid;
+grid-template-columns:
+repeat(4,1fr);
+gap:20px;
+">
+
+<div class="card">
+<h2>${stats.students}</h2>
+<p>Total Students</p>
+</div>
+
+<div class="card">
+<h2>${stats.exams}</h2>
+<p>Total Exams</p>
+</div>
+
+<div class="card">
+<h2>${stats.questions}</h2>
+<p>Total Questions</p>
+</div>
+
+<div class="card">
+<h2>${stats.results}</h2>
+<p>Total Results</p>
+</div>
+
+</div>
+
+<br><br>
+
+<div style="
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+">
+
+<button onclick="loadStudents()">
+Students
+</button>
+
+<button onclick="showCreateExamForm()">
+Exams
+</button>
+
+<button onclick="showQuestionBank()">
+Questions
+</button>
+
+<button onclick="showResults()">
+Results
+</button>
+
+<button onclick="logoutAdmin()">
+Logout
+</button>
+
+</div>
+
+<br>
+
+<div id="studentArea"></div>
+
+</div>
+
+`;
+
+});
+}
+
+function showStudentDashboard(){
+if(
+!localStorage.getItem(
+'studentData'
+)
+){
+return;
+}
+
+let student =
+
+JSON.parse(
+
+localStorage.getItem(
+'studentData'
+)
+
+);
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div style="
+max-width:700px;
+margin:40px auto;
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(139,92,246,.3);
+">
+
+<h1 style="
+text-align:center;
+color:#8b5cf6;
+margin-bottom:20px;
+">
+Welcome ${student.name}
+</h1>
+
+<p><b>Student ID:</b> ${student.id}</p>
+
+<p><b>Course:</b> ${student.course}</p>
+
+<p><b>Institute:</b> ${student.institute}</p>
+
+<p><b>Batch:</b> ${student.batch}</p>
+
+<br>
+
+<div style="
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+">
+
+<button onclick="loadStudentExams()">
+Available Exams
+</button>
+
+<button onclick="loadMyResults()">
+My Results
+</button>
+
+<button onclick="logoutStudent()">
+Logout
+</button>
+
+</div>
+
+<div id="examArea"></div>
+
+</div>
+
+`;
+
+}
+
+function loadMyResults(){
+
+let student =
+
+JSON.parse(
+
+localStorage.getItem(
+'studentData'
+)
+
+);
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getResults',
+
+studentId:
+student.id
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h2>My Results</h2>';
+
+html += '<table border="1" width="100%">';
+
+html += '<tr>';
+
+html += '<th>Exam</th>';
+
+html += '<th>Score</th>';
+
+html += '<th>%</th>';
+
+html += '</tr>';
+
+rows.forEach(r=>{
+
+html += '<tr>';
+
+html += '<td>'+r.examName+'</td>';
+
+html += '<td>'+r.score+'</td>';
+
+html += '<td>'+r.percentage+'%</td>';
+
+html += '</tr>';
+
+});
+
+html += '</table>';
+
+html += '<br><br>';
+
+html += '<button onclick="showStudentDashboard()">';
+
+html += 'Back';
+
+html += '</button>';
+
+document.body.innerHTML = html;
+
+});
+
+}
+
+
+function loadStudentExams(){
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getExams'
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+let html='';
+
+html += '<h3>Available Exams</h3>';
+
+rows.forEach(r=>{
+
+html += '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;">';
+
+html += '<b>'+r.examName+'</b><br>';
+
+html += 'Exam No : '+r.examNo+'<br>';
+
+html += 'Questions : '+r.totalQuestion+'<br>';
+
+html += 'Duration : '+r.duration+' Minutes<br><br>';
+
+html += '<button onclick="startExam(\''+r.examNo+'\',\''+r.examName.replace(/'/g,"\\'")+'\',\''+r.duration+'\')">Start Exam</button>';
+
+html += '</div>';
+
+});
+
+document.getElementById(
+'examArea'
+).innerHTML = html;
+
+});
+
+}
+
+function startExam(
+examNo,
+examName,
+duration
+){
+
+let student =
+
+JSON.parse(
+
+localStorage.getItem(
+'studentData'
+)
+
+);
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'checkAttempt',
+
+studentId:
+student.id,
+
+examNo:
+examNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(result=>{
+
+if(result.attempted){
+
+alert(
+
+'You Have Already Taken This Exam'
+
+);
+
+return;
+
+}
+
+window.currentExamNo =
+examNo;
+
+window.currentExamName =
+examName;
+
+window.examDuration =
+parseInt(duration);
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getQuestions',
+
+examNo:examNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+
+if(rows.length==0){
+
+alert(
+'No Questions Found'
+);
+
+return;
+
+}
+
+window.currentExamNo =
+examNo;
+
+showExamQuestion(
+rows,
+0
+);
+
+});
+
+});
+
+}
+
+function showExamQuestion(
+questions,
+index
+){
+
+window.examQuestions =
+questions;
+
+window.currentQuestion =
+index;
+
+if(!window.studentAnswers){
+
+window.studentAnswers = [];
+
+}
+
+let q =
+questions[index];
+
+let isTF =
+
+q.questionType ==
+
+'TRUE_FALSE';
+
+let html='';
+
+html += '<h2 id="timerArea"></h2>';
+
+html += '<div id="paletteArea">';
+
+for(
+
+let i=0;
+
+i<questions.length;
+
+i++
+
+){
+
+let bg = '#eeeeee';
+
+if(
+window.studentAnswers &&
+window.studentAnswers[i]
+){
+
+bg = '#4caf50';
+
+}
+
+if(
+i == index
+){
+
+bg = '#2196f3';
+
+}
+
+html +=
+
+'<button onclick="jumpQuestion('+
+
+i+
+
+')" style="width:40px;height:40px;margin:2px;background:'+bg+';color:white;border:none;border-radius:5px;">'+
+
+(i+1)+
+
+'</button>';
+
+}
+
+
+
+html += '</div><br>';
+
+html += '<h3>';
+
+html += 'Question ';
+
+html += (index+1);
+
+html += ' of ';
+
+html += questions.length;
+
+html += '</h3>';
+
+html += '<p>';
+
+html += '<b>Question No: </b>';
+
+html += (index+1);
+
+html += '</p>';
+
+html += '<p>';
+
+html += q.question;
+
+html += '</p>';
+
+html += '<div>';
+
+if(isTF){
+
+html += '<label><input type="checkbox" name="ans" value="A"> a. ' + q.optionA + '</label><br><br>';
+
+html += '<label><input type="checkbox" name="ans" value="B"> b. ' + q.optionB + '</label><br><br>';
+
+html += '<label><input type="checkbox" name="ans" value="C"> c. ' + q.optionC + '</label><br><br>';
+
+html += '<label><input type="checkbox" name="ans" value="D"> d. ' + q.optionD + '</label><br><br>';
+
+html += '<label><input type="checkbox" name="ans" value="E"> e. ' + q.optionE + '</label><br><br>';
+
+}else{
+
+html += '<label><input type="radio" name="ans" value="A"> a. ' + q.optionA + '</label><br><br>';
+
+html += '<label><input type="radio" name="ans" value="B"> b. ' + q.optionB + '</label><br><br>';
+
+html += '<label><input type="radio" name="ans" value="C"> c. ' + q.optionC + '</label><br><br>';
+
+html += '<label><input type="radio" name="ans" value="D"> d. ' + q.optionD + '</label><br><br>';
+
+}
+
+html += '</div>';
+
+html += '<button onclick="previousQuestion()">';
+
+html += 'Previous';
+
+html += '</button> ';
+
+if(index == questions.length-1){
+
+html += '<button onclick="submitExam()">';
+
+html += 'Final Submit';
+
+html += '</button>';
+
+}else{
+
+html += '<button onclick="nextQuestion()">';
+
+html += 'Next';
+
+html += '</button>';
+
+}
+
+document.body.innerHTML = html;
+
+startTimer();
+
+let savedAnswer =
+
+window.studentAnswers[
+index
+];
+
+if(savedAnswer){
+
+let radio =
+
+document.querySelector(
+
+'input[name="ans"][value="' +
+
+savedAnswer +
+
+'"]'
+
+);
+
+if(radio){
+
+radio.checked = true;
+
+}
+
+}
+
+}
+
+
+function startTimer(){
+
+if(window.timerStarted){
+
+return;
+
+}
+
+window.timerStarted = true;
+
+let totalSeconds =
+
+window.examDuration * 60;
+
+window.examTimer =
+
+setInterval(function(){
+
+let minutes =
+
+Math.floor(
+totalSeconds / 60
+);
+
+let seconds =
+
+totalSeconds % 60;
+
+let timerText =
+
+String(minutes)
+.padStart(2,'0')
+
++
+
+':'
+
++
+
+String(seconds)
+.padStart(2,'0');
+
+let timerDiv =
+
+document.getElementById(
+'timerArea'
+);
+
+if(timerDiv){
+
+timerDiv.innerHTML =
+timerText;
+
+}
+
+totalSeconds--;
+
+if(totalSeconds < 0){
+
+clearInterval(
+window.examTimer
+);
+
+alert(
+'Time Over'
+);
+
+submitExam();
+
+}
+
+},1000);
+
+}
+
+function nextQuestion(){
+
+let checked =
+
+document.querySelectorAll(
+'input[name="ans"]:checked'
+);
+
+if(checked.length==1){
+
+window.studentAnswers[
+window.currentQuestion
+] = checked[0].value;
+
+}
+
+else if(checked.length>1){
+
+let arr=[];
+
+checked.forEach(x=>{
+
+arr.push(x.value);
+
+});
+
+window.studentAnswers[
+window.currentQuestion
+] = arr.join(',');
+
+}
+
+let nextIndex =
+window.currentQuestion + 1;
+
+if(
+nextIndex >=
+
+window.examQuestions.length
+){
+
+alert(
+'Exam Finished'
+);
+
+return;
+
+}
+
+showExamQuestion(
+window.examQuestions,
+nextIndex
+);
+
+}
+
+function jumpQuestion(index){
+
+let checked =
+
+document.querySelectorAll(
+'input[name="ans"]:checked'
+);
+
+if(checked.length==1){
+
+window.studentAnswers[
+window.currentQuestion
+] = checked[0].value;
+
+}
+
+else if(checked.length>1){
+
+let arr=[];
+
+checked.forEach(x=>{
+
+arr.push(x.value);
+
+});
+
+window.studentAnswers[
+window.currentQuestion
+] = arr.join(',');
+
+}
+
+showExamQuestion(
+
+window.examQuestions,
+
+index
+
+);
+
+}
+
+function submitExam(){
+
+let answered = 0;
+
+for(
+let i=0;
+i<window.studentAnswers.length;
+i++
+){
+
+if(
+window.studentAnswers[i]
+){
+
+answered++;
+
+}
+
+}
+
+let notAnswered =
+
+window.examQuestions.length
+-
+answered;
+
+let confirmSubmit =
+
+confirm(
+
+'Final Submit?\n\n' +
+
+'Answered : ' +
+
+answered +
+
+'\n\n' +
+
+'Not Answered : ' +
+
+notAnswered +
+
+'\n\n' +
+
+'You cannot change answers after submit.'
+
+);
+
+if(!confirmSubmit){
+
+return;
+
+}
+
+let selected =
+
+document.querySelector(
+'input[name="ans"]:checked'
+);
+
+if(selected){
+
+window.studentAnswers[
+window.currentQuestion
+] = selected.value;
+
+}
+
+
+let correct = 0;
+
+for(
+
+let i=0;
+
+i<window.examQuestions.length;
+
+i++
+
+){
+
+let userAnswer =
+
+window.studentAnswers[i];
+
+let correctAnswer =
+
+window.examQuestions[i]
+.correctAnswer;
+
+if(
+
+userAnswer &&
+userAnswer.toUpperCase()
+==
+correctAnswer.toUpperCase()
+
+){
+
+correct++;
+
+}
+
+}
+
+let wrong =
+
+answered - correct;
+
+let total =
+
+window.examQuestions.length;
+
+let percentage =
+
+(
+correct * 100
+/
+total
+).toFixed(2);
+
+let student =
+
+JSON.parse(
+
+localStorage.getItem(
+'studentData'
+)
+
+);
+
+window.examResult = {
+
+studentId:
+student.id,
+
+studentName:
+student.name,
+
+total:
+total,
+
+answered:
+answered,
+
+correct:
+correct,
+
+wrong:
+wrong,
+
+percentage:
+percentage
+
+};
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'saveResult',
+
+studentId:
+student.id,
+
+studentName:
+student.name,
+
+examNo:
+window.examQuestions[0].examNo,
+
+examName:
+window.currentExamName,
+
+score:
+correct,
+
+correct:
+correct,
+
+wrong:
+wrong,
+
+percentage:
+percentage
+
+})
+
+})
+.then(res=>res.json())
+.then(data=>{
+
+console.log(
+'Result Saved'
+);
+
+});
+
+
+showResultPage();
+
+}
+
+function showResultPage(){
+
+let r =
+window.examResult;
+
+document.body.innerHTML = `
+
+<div style="padding:20px">
+
+<h2>
+Exam Result
+</h2>
+
+<p>
+
+<b>Exam No:</b>
+
+${window.currentExamNo}
+
+</p>
+
+<p>
+
+<b>Exam Name:</b>
+
+${window.currentExamName}
+
+</p>
+
+<hr>
+
+<hr>
+
+<p>
+<b>Student ID:</b>
+${r.studentId}
+</p>
+
+<p>
+<b>Student Name:</b>
+${r.studentName}
+</p>
+
+<p>
+<b>Total Question:</b>
+${r.total}
+</p>
+
+<p>
+<b>Answered:</b>
+${r.answered}
+</p>
+
+<p>
+<b>Correct:</b>
+${r.correct}
+</p>
+
+<p>
+<b>Wrong:</b>
+${r.wrong}
+</p>
+
+<p>
+<b>Percentage:</b>
+${r.percentage}%
+</p>
+
+<hr>
+
+<div id="reviewArea"></div>
+
+</div>
+
+`;
+
+let html='';
+
+for(
+
+let i=0;
+
+i<window.examQuestions.length;
+
+i++
+
+){
+
+let q =
+window.examQuestions[i];
+
+let userAns =
+window.studentAnswers[i] || 'Not Answered';
+
+let correctAns =
+q.correctAnswer;
+
+let resultMark =
+
+userAns.toUpperCase() ==
+correctAns.toUpperCase()
+
+?
+
+'✅ Correct'
+
+:
+
+'❌ Wrong';
+
+html += '<hr>';
+
+html += '<h3>';
+
+html += 'Q' + (i+1) + '. ';
+
+html += q.question;
+
+html += '</h3>';
+
+html += '<p>a. ' + q.optionA + '</p>';
+
+html += '<p>b. ' + q.optionB + '</p>';
+
+html += '<p>c. ' + q.optionC + '</p>';
+
+html += '<p>d. ' + q.optionD + '</p>';
+
+html += '<br>';
+
+html += '<b>Your Answer : </b>';
+
+html += userAns;
+
+html += '<br>';
+
+html += '<b>Correct Answer : </b>';
+
+html += correctAns;
+
+html += '<br><br>';
+
+html += resultMark;
+
+}
+
+document.getElementById(
+'reviewArea'
+).innerHTML = html;
+
+}
+
+function previousQuestion(){
+
+let checked =
+
+document.querySelectorAll(
+'input[name="ans"]:checked'
+);
+
+if(checked.length==1){
+
+window.studentAnswers[
+window.currentQuestion
+] = checked[0].value;
+
+}
+
+else if(checked.length>1){
+
+let arr=[];
+
+checked.forEach(x=>{
+
+arr.push(x.value);
+
+});
+
+window.studentAnswers[
+window.currentQuestion
+] = arr.join(',');
+
+}
+
+let previousIndex =
+window.currentQuestion - 1;
+
+if(previousIndex < 0){
+
+return;
+
+}
+
+showExamQuestion(
+
+window.examQuestions,
+
+previousIndex
+
+);
+
+}
+
+function logoutStudent(){
+
+localStorage.removeItem(
+'studentData'
+);
+
+location.reload();
+
+}
+
+if(
+
+localStorage.getItem(
+'studentData'
+)
+
+){
+
+showStudentDashboard();
+
+}
+
+if(
+
+localStorage.getItem(
+'adminLogin'
+)
+
+){
+
+showAdminDashboard();
+
+}
+</script>
+
+</body>
+
+</html>
