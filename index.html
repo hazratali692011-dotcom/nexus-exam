@@ -932,6 +932,7 @@ html += '<th>Name</th>';
 html += '<th>Phone</th>';
 html += '<th>Email</th>';
 html += '<th>Status</th>';
+html += '<th>Premium</th>';
 html += '<th>Action</th>';
 html += '</tr>';
 
@@ -949,7 +950,29 @@ html += '<td>'+r.email+'</td>';
 
 html += '<td>'+r.status+'</td>';
 
-html += '<td>';html += '<td>';
+html += '<td>';
+
+if(r.premiumStatus=='PAID'){
+
+html += '<b style="color:#86efac;">PAID</b><br>';
+
+html += '<button onclick="deactivatePremium(\''+r.id+'\')">';
+html += 'Deactivate';
+html += '</button>';
+
+}else{
+
+html += '<b style="color:#fcd34d;">FREE</b><br>';
+
+html += '<button onclick="activatePremium(\''+r.id+'\')">';
+html += 'Activate Premium';
+html += '</button>';
+
+}
+
+html += '</td>';
+
+html += '<td>';
 
 html += '<button onclick="viewStudent(\''+r.id+'\')">Profile</button> ';
 
@@ -979,6 +1002,81 @@ document.getElementById(
 
 }
 
+
+function activatePremium(id){
+
+let expiry = prompt(
+'Premium expiry date লিখুন\nExample: 31-12-2026'
+);
+
+if(!expiry){
+return;
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'activatePremium',
+
+id:id,
+
+expiry:expiry
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert('Premium Activated Successfully');
+
+loadStudents();
+
+});
+
+}
+
+
+function deactivatePremium(id){
+
+let ok = confirm(
+'এই student-এর Premium বন্ধ করবেন?'
+);
+
+if(!ok){
+return;
+}
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'deactivatePremium',
+
+id:id
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert('Premium Deactivated');
+
+loadStudents();
+
+});
+
+}
 
 function viewStudent(id){
 
@@ -3347,6 +3445,12 @@ student.id,
 studentName:
 student.name,
 
+examNo:
+window.currentExamNo,
+
+examName:
+window.currentExamName,
+
 total:
 total,
 
@@ -3458,7 +3562,7 @@ padding:8px 14px;
 border-radius:20px;
 font-weight:700;
 ">
-Exam No: ${window.currentExamNo}
+Exam No: ${r.examNo}
 </span>
 
 <span style="
@@ -3468,7 +3572,7 @@ padding:8px 14px;
 border-radius:20px;
 font-weight:700;
 ">
-${window.currentExamName}
+${r.examName}
 </span>
 
 </div>
