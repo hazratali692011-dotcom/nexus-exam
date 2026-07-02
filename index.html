@@ -280,11 +280,136 @@ opacity:1;
 }
 
 }
+
+.menu-toggle{
+display:none;
+position:fixed;
+top:12px;
+left:12px;
+z-index:1001;
+padding:10px 14px;
+font-size:22px;
+border-radius:10px;
+background:#8b5cf6;
+}
+
+@media(max-width:768px){
+
+.header{
+padding:18px 10px 14px;
+}
+
+.brand-main{
+font-size:32px;
+letter-spacing:1px;
+}
+
+.brand-sub{
+font-size:14px;
+}
+
+.menu-toggle{
+display:block;
+}
+
+.layout{
+display:block;
+min-height:calc(100vh - 82px);
+}
+
+.sidebar{
+position:fixed;
+top:0;
+left:-280px;
+z-index:1000;
+width:260px;
+height:100vh;
+padding-top:85px;
+overflow-y:auto;
+transition:left .3s ease;
+box-shadow:8px 0 25px rgba(0,0,0,.45);
+}
+
+.sidebar.mobile-open{
+left:0;
+}
+
+.content{
+padding:18px 12px;
+width:100%;
+}
+
+.welcome-box{
+margin-top:12px;
+}
+
+.welcome-box h1{
+font-size:34px;
+line-height:1.15;
+}
+
+.welcome-box h3{
+font-size:17px;
+}
+
+.welcome-box p{
+font-size:15px;
+line-height:1.55;
+}
+
+.blink-text{
+font-size:17px;
+margin-top:22px;
+}
+
+.card{
+width:100%;
+max-width:100%;
+margin:15px auto;
+padding:20px 16px;
+}
+
+.card h2{
+font-size:25px;
+}
+
+button{
+min-height:46px;
+font-size:15px;
+padding:12px 14px;
+}
+
+input,
+textarea,
+select{
+font-size:16px;
+padding:13px;
+}
+
+table{
+min-width:650px;
+}
+
+#studentArea,
+#examArea{
+overflow-x:auto;
+width:100%;
+}
+
+}
+
 </style>
 
 </head>
 
 <body>
+
+<button
+class="menu-toggle"
+onclick="toggleMobileMenu()"
+aria-label="Open menu">
+☰
+</button>
 
 <div class="header">
 
@@ -380,6 +505,16 @@ Student Management & Assessment System
 </div>
 
 <script>
+function toggleMobileMenu(){
+
+document.querySelector(
+'.sidebar'
+).classList.toggle(
+'mobile-open'
+);
+
+}
+
 
 const scriptURL =
 'https://script.google.com/macros/s/AKfycbwXiHHfzDIH8dOvmutb-e4qLGwNDXs9J2Tyt5EPh8Ko3-EsZo2B4iay_ikahxDsnMG15w/exec';
