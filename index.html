@@ -668,6 +668,26 @@ String(
 Date.now()
 ).slice(-4);
 
+let registerButton =
+
+document.querySelector(
+'button[onclick="registerStudent()"]'
+);
+
+if(registerButton){
+
+registerButton.disabled = true;
+
+registerButton.innerHTML =
+'Registering... Please Wait';
+
+registerButton.style.opacity = '.7';
+
+registerButton.style.cursor =
+'not-allowed';
+
+}
+
 let data={
 
 action:'register',
@@ -737,8 +757,22 @@ document.getElementById(
 
 .catch(()=>{
 
+if(registerButton){
+
+registerButton.disabled = false;
+
+registerButton.innerHTML =
+'Register Now';
+
+registerButton.style.opacity = '1';
+
+registerButton.style.cursor =
+'pointer';
+
+}
+
 alert(
-'Server Error'
+'Server Error. Please try again.'
 );
 
 });
@@ -765,6 +799,25 @@ return;
 
 }
 
+let loginButton =
+
+document.querySelector(
+'button[onclick="loginStudent()"]'
+);
+
+if(loginButton){
+
+loginButton.disabled = true;
+
+loginButton.innerHTML =
+'Logging in... Please Wait';
+
+loginButton.style.opacity = '.7';
+
+loginButton.style.cursor =
+'not-allowed';
+
+}
 fetch(scriptURL,{
 
 method:'POST',
@@ -800,6 +853,20 @@ showStudentDashboard();
 
 }else{
 
+if(loginButton){
+
+loginButton.disabled = false;
+
+loginButton.innerHTML =
+'Login';
+
+loginButton.style.opacity = '1';
+
+loginButton.style.cursor =
+'pointer';
+
+}
+
 alert(
 'Wrong ID Or Password'
 );
@@ -810,12 +877,25 @@ alert(
 
 .catch(()=>{
 
+if(loginButton){
+
+loginButton.disabled = false;
+
+loginButton.innerHTML =
+'Login';
+
+loginButton.style.opacity = '1';
+
+loginButton.style.cursor =
+'pointer';
+
+}
+
 alert(
-'Server Error'
+'Server Error. Please try again.'
 );
 
 });
-
 }
 
 function adminLogin(){
@@ -2797,7 +2877,7 @@ html += '</div>';
 
 }else{
 
-rows.reverse().forEach(r=>{
+rows.slice().reverse().forEach(r=>{
 
 let resultColor =
 Number(r.percentage) >= 50
@@ -3951,6 +4031,25 @@ return;
 
 }
 
+let finalButton =
+
+document.querySelector(
+'button[onclick="submitExam()"]'
+);
+
+if(finalButton){
+
+finalButton.disabled = true;
+
+finalButton.innerHTML =
+'Submitting... Please Wait';
+
+finalButton.style.opacity = '.7';
+
+finalButton.style.cursor =
+'not-allowed';
+
+}
 
 let correct = 0;
 
@@ -4117,7 +4216,7 @@ method:'POST',
 
 body:JSON.stringify({
 
-action:'saveResult',
+action:'submitExamFull',
 
 studentId:
 student.id,
@@ -4144,32 +4243,7 @@ percentage:
 percentage,
 
 totalMark:
-total
-
-})
-
-})
-.then(res=>res.json())
-.then(data=>{
-
-console.log(
-'Result Saved'
-);
-
-});
-fetch(scriptURL,{
-
-method:'POST',
-
-body:JSON.stringify({
-
-action:'saveAnswerHistory',
-
-studentId:
-student.id,
-
-examNo:
-window.examQuestions[0].examNo,
+total,
 
 answers:
 answerHistoryList
@@ -4180,13 +4254,32 @@ answerHistoryList
 .then(res=>res.json())
 .then(data=>{
 
+if(data.status=='SUCCESS'){
+
 console.log(
-'Answer History Saved'
+'Exam Result And Answer History Saved'
+);
+
+showResultPage();
+
+}else{
+
+alert(
+'Submit failed. Please try again.'
+);
+
+}
+
+})
+.catch(error=>{
+
+console.log(error);
+
+alert(
+'Network error. Please try again.'
 );
 
 });
-
-showResultPage();
 
 }
 
