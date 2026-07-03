@@ -2798,6 +2798,10 @@ document.body.innerHTML = html;
 
 function loadStudentExams(){
 
+let student = JSON.parse(
+localStorage.getItem('studentData')
+);
+
 fetch(scriptURL,{
 
 method:'POST',
@@ -2816,21 +2820,79 @@ action:'getExams'
 
 let html='';
 
-html += '<h3>Available Exams</h3>';
+html += '<h3 style="text-align:center;color:#c4b5fd;">Available Exams</h3>';
+
+html += '<p style="text-align:center;color:#94a3b8;">';
+html += 'Account Type: ';
+html += '<b style="color:' +
+(student.premiumStatus=='PAID' ? '#86efac' : '#fcd34d') +
+';">';
+html += student.premiumStatus || 'FREE';
+html += '</b>';
+html += '</p>';
 
 rows.forEach(r=>{
 
-html += '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;">';
+let isPaidExam = r.examCategory == 'PAID';
 
-html += '<b>'+r.examName+'</b><br>';
+let isPremiumStudent = student.premiumStatus == 'PAID';
 
-html += 'Exam No : '+r.examNo+'<br>';
+let canStart = !isPaidExam || isPremiumStudent;
 
-html += 'Questions : '+r.totalQuestion+'<br>';
+html += '<div style="';
+html += 'background:#1e293b;';
+html += 'border:1px solid ' + (canStart ? '#334155' : '#7c2d12') + ';';
+html += 'border-radius:16px;';
+html += 'padding:16px;';
+html += 'margin:12px 0;';
+html += 'box-shadow:0 6px 18px rgba(0,0,0,.2);';
+html += '">';
 
-html += 'Duration : '+r.duration+' Minutes<br><br>';
+html += '<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">';
 
-html += '<button onclick="startExam(\''+r.examNo+'\',\''+r.examName.replace(/'/g,"\\'")+'\',\''+r.duration+'\')">Start Exam</button>';
+html += '<b style="font-size:18px;color:#e9d5ff;">';
+html += r.examName;
+html += '</b>';
+
+if(isPaidExam){
+
+html += '<span style="background:#7c2d12;color:#fed7aa;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold;">';
+html += 'PREMIUM';
+html += '</span>';
+
+}else{
+
+html += '<span style="background:#14532d;color:#bbf7d0;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold;">';
+html += 'FREE';
+html += '</span>';
+
+}
+
+html += '</div>';
+
+html += '<p style="color:#cbd5e1;margin:12px 0 4px;">';
+html += 'Exam No: ' + r.examNo + '<br>';
+html += 'Questions: ' + r.totalQuestion + '<br>';
+html += 'Duration: ' + r.duration + ' Minutes';
+html += '</p>';
+
+if(canStart){
+
+html += '<button onclick="startExam(\\'' + r.examNo + '\\',\\'' + r.examName.replace(/'/g,"\\'") + '\\',\\'' + r.duration + '\\')">';
+html += 'Start Exam';
+html += '</button>';
+
+}else{
+
+html += '<button disabled style="background:#475569;cursor:not-allowed;opacity:.8;">';
+html += '🔒 Premium Required';
+html += '</button>';
+
+html += '<p style="color:#fcd34d;font-size:13px;margin-top:10px;">';
+html += 'Payment করে Premium activate করতে Admin-এর সাথে যোগাযোগ করুন।';
+html += '</p>';
+
+}
 
 html += '</div>';
 
