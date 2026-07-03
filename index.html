@@ -1401,6 +1401,8 @@ html += '<th>Exam Name</th>';
 
 html += '<th>Questions</th>';
 
+html += '<th>Added</th>';
+
 html += '<th>Marks</th>';
 
 html += '<th>Duration</th>';
@@ -1421,6 +1423,8 @@ html += '<td>'+r.examName+'</td>';
 
 html += '<td>'+r.totalQuestion+'</td>';
 
+html += '<td id="count_'+r.examNo+'">Loading...</td>';
+
 html += '<td>'+r.totalMark+'</td>';
 
 html += '<td>'+r.duration+'</td>';
@@ -1436,6 +1440,44 @@ html += '</td>';
 html += '</tr>';
 
 });
+
+setTimeout(()=>{
+
+rows.forEach(r=>{
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getExamQuestionCount',
+
+examNo:r.examNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let cell = document.getElementById(
+'count_'+r.examNo
+);
+
+if(cell){
+
+cell.innerHTML = data.count;
+
+}
+
+});
+
+});
+
+},300);
 
 html += '</table>';
 
@@ -2728,14 +2770,10 @@ Logout
 
 function loadMyResults(){
 
-let student =
-
-JSON.parse(
-
+let student = JSON.parse(
 localStorage.getItem(
 'studentData'
 )
-
 );
 
 fetch(scriptURL,{
@@ -2746,8 +2784,7 @@ body:JSON.stringify({
 
 action:'getResults',
 
-studentId:
-student.id
+studentId:student.id
 
 })
 
@@ -2759,50 +2796,249 @@ student.id
 
 let html='';
 
-html += '<h2>My Results</h2>';
+html += '<div style="max-width:900px;margin:auto;padding:14px;">';
 
-html += '<table border="1" width="100%">';
+html += '<h2 style="text-align:center;color:#e9d5ff;">My Results</h2>';
 
-html += '<tr>';
+if(!rows || rows.length==0){
 
-html += '<th>Exam</th>';
+html += '<div style="background:#1e293b;border:1px solid #334155;border-radius:14px;padding:20px;text-align:center;color:#cbd5e1;">';
+html += 'এখনও কোনো exam result নেই।';
+html += '</div>';
 
-html += '<th>Score</th>';
+}else{
 
-html += '<th>%</th>';
+rows.reverse().forEach(r=>{
 
-html += '</tr>';
+let resultColor =
+Number(r.percentage) >= 50
+? '#86efac'
+: '#fca5a5';
 
-rows.forEach(r=>{
+html += '<div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 6px 18px rgba(0,0,0,.18);">';
 
-html += '<tr>';
+html += '<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">';
 
-html += '<td>'+r.examName+'</td>';
+html += '<div>';
+html += '<b style="font-size:17px;color:#e9d5ff;">' + r.examName + '</b><br>';
+html += '<span style="font-size:13px;color:#94a3b8;">Exam No: ' + r.examNo + '</span>';
+html += '</div>';
 
-html += '<td>'+r.score+'</td>';
+html += '<b style="color:' + resultColor + ';font-size:18px;">' + r.percentage + '%</b>';
 
-html += '<td>'+r.percentage+'%</td>';
+html += '</div>';
 
-html += '</tr>';
+html += '<div style="margin-top:12px;color:#cbd5e1;line-height:1.8;font-size:14px;">';
+html += 'Total Mark: <b>' + (r.totalMark || '-') + '</b><br>';
+html += 'Score: <b>' + r.score + '</b><br>';
+html += 'Correct: <b>' + r.correct + '</b> &nbsp; Wrong: <b>' + r.wrong + '</b><br>';
+html += 'Exam Date: <b>' + formatResultDate(r.submitTime) + '</b>';
+html += '</div>';
 
-});
+html += '<button onclick="viewOldResultDetails(\'' +
+r.examNo + '\',\'' +
+String(r.examName).replace(/'/g,"\\'") +
+'\')" style="width:100%;margin-top:14px;padding:12px;font-size:15px;">';
 
-html += '</table>';
-
-html += '<br><br>';
-
-html += '<button onclick="showStudentDashboard()">';
-
-html += 'Back';
+html += 'View Details / Answer Review';
 
 html += '</button>';
 
-document.body.innerHTML = html;
+html += '</div>';
 
 });
 
 }
 
+html += '<button onclick="showStudentDashboard()" style="width:100%;margin-top:18px;padding:13px;">';
+html += '← Back to Dashboard';
+html += '</button>';
+
+html += '</div>';
+
+document.body.innerHTML = html;
+
+})
+
+.catch(error=>{
+
+alert('Result load error: ' + error);
+
+});
+
+}
+
+
+function formatResultDate(value){
+
+if(!value){
+return '-';
+}
+
+let d = new Date(value);
+
+if(isNaN(d.getTime())){
+return value;
+}
+
+return d.toLocaleDateString(
+'en-GB',
+{
+day:'2-digit',
+month:'short',
+year:'numeric'
+}
+);
+
+}
+
+
+function viewOldResultDetails(
+examNo,
+examName
+){
+
+let student = JSON.parse(
+localStorage.getItem(
+'studentData'
+)
+);
+
+fetch(scriptURL,{
+
+method:'POST',
+
+body:JSON.stringify({
+
+action:'getAnswerHistory',
+
+studentId:student.id,
+
+examNo:examNo
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(rows=>{
+
+if(!rows || rows.length==0){
+
+alert(
+'এই result-এর answer review পাওয়া যায়নি। সম্ভবত এই examটি AnswerHistory system চালুর আগেই submit করা হয়েছিল।'
+);
+
+return;
+
+}
+
+let html='';
+
+html += '<div style="max-width:900px;margin:auto;padding:14px;">';
+
+html += '<h2 style="text-align:center;color:#e9d5ff;">Answer Review</h2>';
+
+html += '<p style="text-align:center;color:#94a3b8;">';
+html += examName + ' (Exam No: ' + examNo + ')';
+html += '</p>';
+
+rows.forEach(r=>{
+
+let isCorrect =
+r.status == 'CORRECT';
+
+let isNotAnswered =
+r.status == 'NOT ANSWERED';
+
+let borderColor =
+isCorrect
+? '#16a34a'
+: (
+isNotAnswered
+? '#64748b'
+: '#dc2626'
+);
+
+let statusText =
+isCorrect
+? '✓ Correct'
+: (
+isNotAnswered
+? '— Not Answered'
+: '✗ Wrong'
+);
+
+let statusColor =
+isCorrect
+? '#86efac'
+: (
+isNotAnswered
+? '#cbd5e1'
+: '#fca5a5'
+);
+
+html += '<div style="background:#1e293b;border:1px solid ' + borderColor + ';border-radius:16px;padding:16px;margin:14px 0;">';
+
+html += '<div style="display:flex;justify-content:space-between;gap:10px;">';
+
+html += '<b style="color:#e9d5ff;">Question ' + r.questionNo + '</b>';
+
+html += '<b style="color:' + statusColor + ';">' + statusText + '</b>';
+
+html += '</div>';
+
+html += '<div style="margin-top:10px;color:#f8fafc;line-height:1.6;">';
+html += r.question;
+html += '</div>';
+
+html += '<div style="margin-top:12px;color:#cbd5e1;line-height:1.75;font-size:14px;">';
+
+html += '<div>a. ' + r.optionA + '</div>';
+html += '<div>b. ' + r.optionB + '</div>';
+html += '<div>c. ' + r.optionC + '</div>';
+html += '<div>d. ' + r.optionD + '</div>';
+
+if(r.optionE){
+
+html += '<div>e. ' + r.optionE + '</div>';
+
+}
+
+html += '</div>';
+
+html += '<div style="margin-top:14px;padding:12px;border-radius:10px;background:#0f172a;line-height:1.8;font-size:14px;">';
+
+html += '<div style="color:#fca5a5;">Your Answer: <b>' + (r.studentAnswer || 'Not Answered') + '</b></div>';
+
+html += '<div style="color:#86efac;">Correct Answer: <b>' + r.correctAnswer + '</b></div>';
+
+html += '</div>';
+
+html += '</div>';
+
+});
+
+html += '<button onclick="loadMyResults()" style="width:100%;margin-top:18px;padding:13px;">';
+html += '← Back to My Results';
+html += '</button>';
+
+html += '</div>';
+
+document.body.innerHTML = html;
+
+})
+
+.catch(error=>{
+
+alert(
+'Answer review load error: ' + error
+);
+
+});
+
+}
 
 function loadStudentExams(){
 
@@ -3078,28 +3314,48 @@ q.questionType ==
 
 let html='';
 
-html += '<h2 id="timerArea"></h2>';
+html += '<div style="';
+html += 'position:sticky;top:0;z-index:100;background:#0f172a;padding:10px 0 8px;margin-bottom:8px;border-bottom:1px solid #334155;text-align:center;';
+html += '"><h2 id="timerArea" style="margin:0;color:#fcd34d;font-size:20px;"></h2></div>';
 
-html += '<div id="paletteArea">';
+let pageSize = 20;
+
+let currentPage = Math.floor(index / pageSize);
+
+let startQuestion = currentPage * pageSize;
+
+let endQuestion = Math.min(
+startQuestion + pageSize,
+questions.length
+);
+
+html += '<div id="paletteArea" style="';
+html += 'display:flex;';
+html += 'gap:6px;';
+html += 'flex-wrap:nowrap;';
+html += 'overflow-x:auto;';
+html += 'padding:8px 2px 12px;';
+html += 'margin-bottom:8px;';
+html += '">';
 
 for(
 
-let i=0;
+let i=startQuestion;
 
-i<questions.length;
+i<endQuestion;
 
 i++
 
 ){
 
-let bg = '#eeeeee';
+let bg = '#475569';
 
 if(
 window.studentAnswers &&
 window.studentAnswers[i]
 ){
 
-bg = '#4caf50';
+bg = '#16a34a';
 
 }
 
@@ -3107,27 +3363,100 @@ if(
 i == index
 ){
 
-bg = '#2196f3';
+bg = '#8b5cf6';
 
 }
 
-html +=
+html += '<button onclick="jumpQuestion(' + i + ')" style="';
+html += 'min-width:42px;';
+html += 'height:42px;';
+html += 'padding:0;';
+html += 'margin:0;';
+html += 'background:' + bg + ';';
+html += 'color:white;';
+html += 'border:none;';
+html += 'border-radius:10px;';
+html += 'font-weight:bold;';
+html += 'flex:0 0 auto;';
+html += '">';
 
-'<button onclick="jumpQuestion('+
+html += (i+1);
 
-i+
-
-')" style="width:40px;height:40px;margin:2px;background:'+bg+';color:white;border:none;border-radius:5px;">'+
-
-(i+1)+
-
-'</button>';
+html += '</button>';
 
 }
 
+html += '</div>';
 
+html += '<div style="';
+html += 'display:flex;';
+html += 'justify-content:space-between;';
+html += 'align-items:center;';
+html += 'margin-bottom:12px;';
+html += '">';
 
-html += '</div><br>';
+if(currentPage > 0){
+
+html += '<button onclick="jumpQuestion(' + (startQuestion-1) + ')">';
+html += '← Previous 20';
+html += '</button>';
+
+}else{
+
+html += '<span></span>';
+
+}
+
+html += '<span style="color:#cbd5e1;font-size:13px;">';
+html += 'Questions ' + (startQuestion+1) + '–' + endQuestion;
+html += '</span>';
+
+if(endQuestion < questions.length){
+
+html += '<button onclick="jumpQuestion(' + endQuestion + ')">';
+html += 'Next 20 →';
+html += '</button>';
+
+}else{
+
+html += '<span></span>';
+
+}
+
+html += '</div>';
+
+let currentType = q.questionType == 'TRUE_FALSE'
+? 'True / False'
+: 'Best Answer';
+
+let previousType = '';
+
+if(index > 0){
+
+previousType = questions[index-1].questionType == 'TRUE_FALSE'
+? 'True / False'
+: 'Best Answer';
+
+}
+
+if(index == 0 || currentType != previousType){
+
+html += '<div style="';
+html += 'margin:12px 0;';
+html += 'padding:10px 14px;';
+html += 'background:#312e81;';
+html += 'border:1px solid #8b5cf6;';
+html += 'border-radius:10px;';
+html += 'color:#e9d5ff;';
+html += 'font-weight:bold;';
+html += 'text-align:center;';
+html += '">';
+
+html += currentType;
+
+html += '</div>';
+
+}
 
 html += '<h3>';
 
@@ -3149,63 +3478,83 @@ html += (index+1);
 
 html += '</p>';
 
-html += '<p>';
+html += '<div style="';
+html += 'background:#1e293b;';
+html += 'border:1px solid #334155;';
+html += 'border-radius:16px;';
+html += 'padding:18px;';
+html += 'margin:12px 0 16px;';
+html += 'box-shadow:0 6px 18px rgba(0,0,0,.2);';
+html += '">';
+
+html += '<p style="';
+html += 'margin:0;';
+html += 'font-size:17px;';
+html += 'line-height:1.65;';
+html += 'color:#f8fafc;';
+html += 'font-weight:500;';
+html += '">';
 
 html += q.question;
 
 html += '</p>';
 
-html += '<div>';
+html += '</div>';
+
+html += '<div style="display:grid;gap:10px;">';
 
 if(isTF){
 
-html += '<label><input type="checkbox" name="ans" value="A"> a. ' + q.optionA + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="checkbox" name="ans" value="A" style="transform:scale(1.25);margin-right:10px;"> <b>a.</b> ' + q.optionA + '</label>';
 
-html += '<label><input type="checkbox" name="ans" value="B"> b. ' + q.optionB + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="checkbox" name="ans" value="B" style="transform:scale(1.25);margin-right:10px;"> <b>b.</b> ' + q.optionB + '</label>';
 
-html += '<label><input type="checkbox" name="ans" value="C"> c. ' + q.optionC + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="checkbox" name="ans" value="C" style="transform:scale(1.25);margin-right:10px;"> <b>c.</b> ' + q.optionC + '</label>';
 
-html += '<label><input type="checkbox" name="ans" value="D"> d. ' + q.optionD + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="checkbox" name="ans" value="D" style="transform:scale(1.25);margin-right:10px;"> <b>d.</b> ' + q.optionD + '</label>';
 
-html += '<label><input type="checkbox" name="ans" value="E"> e. ' + q.optionE + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="checkbox" name="ans" value="E" style="transform:scale(1.25);margin-right:10px;"> <b>e.</b> ' + q.optionE + '</label>';
 
 }else{
 
-html += '<label><input type="radio" name="ans" value="A"> a. ' + q.optionA + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="radio" name="ans" value="A" style="transform:scale(1.25);margin-right:10px;"> <b>a.</b> ' + q.optionA + '</label>';
 
-html += '<label><input type="radio" name="ans" value="B"> b. ' + q.optionB + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="radio" name="ans" value="B" style="transform:scale(1.25);margin-right:10px;"> <b>b.</b> ' + q.optionB + '</label>';
 
-html += '<label><input type="radio" name="ans" value="C"> c. ' + q.optionC + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="radio" name="ans" value="C" style="transform:scale(1.25);margin-right:10px;"> <b>c.</b> ' + q.optionC + '</label>';
 
-html += '<label><input type="radio" name="ans" value="D"> d. ' + q.optionD + '</label><br><br>';
+html += '<label style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;display:block;font-size:16px;line-height:1.45;"><input type="radio" name="ans" value="D" style="transform:scale(1.25);margin-right:10px;"> <b>d.</b> ' + q.optionD + '</label>';
 
 }
 
 html += '</div>';
 
-html += '<button onclick="previousQuestion()">';
+html += '<div style="display:flex;gap:10px;margin-top:20px;">';
 
-html += 'Previous';
+html += '<button onclick="previousQuestion()" style="flex:1;padding:14px;font-size:16px;">';
 
-html += '</button> ';
+html += '← Previous';
+
+html += '</button>';
 
 if(index == questions.length-1){
 
-html += '<button onclick="submitExam()">';
+html += '<button onclick="submitExam()" style="flex:1;padding:14px;font-size:16px;background:#16a34a;">';
 
-html += 'Final Submit';
+html += '✓ Final Submit';
 
 html += '</button>';
 
 }else{
 
-html += '<button onclick="nextQuestion()">';
+html += '<button onclick="nextQuestion()" style="flex:1;padding:14px;font-size:16px;">';
 
-html += 'Next';
+html += 'Next →';
 
 html += '</button>';
 
 }
+html += '</div>';
 
 document.body.innerHTML = html;
 
@@ -3219,23 +3568,26 @@ index
 
 if(savedAnswer){
 
-let radio =
+let savedList =
+savedAnswer.split(',');
+
+savedList.forEach(ans=>{
+
+let input =
 
 document.querySelector(
-
 'input[name="ans"][value="' +
-
-savedAnswer +
-
+ans +
 '"]'
-
 );
 
-if(radio){
+if(input){
 
-radio.checked = true;
+input.checked = true;
 
 }
+
+});
 
 }
 
@@ -3417,6 +3769,56 @@ index
 
 function submitExam(){
 
+let unanswered = 0;
+
+for(
+
+let i=0;
+
+i<window.examQuestions.length;
+
+i++
+
+){
+
+if(
+!window.studentAnswers[i]
+){
+
+unanswered++;
+
+}
+
+}
+
+let message =
+
+'আপনি কি Final Submit করতে চান?';
+
+if(unanswered > 0){
+
+message +=
+
+'\n\n⚠ এখনও ' +
+
+unanswered +
+
+' টি question answer করা হয়নি।';
+
+message +=
+
+'\n\nUnanswered question থাকলেও Submit করতে চান?';
+
+}
+
+let ok = confirm(message);
+
+if(!ok){
+
+return;
+
+}
+
 let checked =
 
 document.querySelectorAll(
@@ -3562,6 +3964,72 @@ localStorage.getItem(
 
 );
 
+let answerHistoryList = [];
+
+for(
+
+let i=0;
+
+i<window.examQuestions.length;
+
+i++
+
+){
+
+let q =
+window.examQuestions[i];
+
+let studentAnswer =
+window.studentAnswers[i] || '';
+
+let answerStatus = 'NOT ANSWERED';
+
+if(studentAnswer){
+
+if(
+studentAnswer.toUpperCase()
+==
+q.correctAnswer.toUpperCase()
+){
+
+answerStatus = 'CORRECT';
+
+}else{
+
+answerStatus = 'WRONG';
+
+}
+
+}
+
+answerHistoryList.push({
+
+questionNo:i+1,
+
+questionType:q.questionType,
+
+question:q.question,
+
+optionA:q.optionA,
+
+optionB:q.optionB,
+
+optionC:q.optionC,
+
+optionD:q.optionD,
+
+optionE:q.optionE,
+
+studentAnswer:studentAnswer,
+
+correctAnswer:q.correctAnswer,
+
+status:answerStatus
+
+});
+
+}
+
 window.examResult = {
 
 studentId:
@@ -3623,7 +4091,10 @@ wrong:
 wrong,
 
 percentage:
-percentage
+percentage,
+
+totalMark:
+total
 
 })
 
@@ -3636,7 +4107,34 @@ console.log(
 );
 
 });
+fetch(scriptURL,{
 
+method:'POST',
+
+body:JSON.stringify({
+
+action:'saveAnswerHistory',
+
+studentId:
+student.id,
+
+examNo:
+window.examQuestions[0].examNo,
+
+answers:
+answerHistoryList
+
+})
+
+})
+.then(res=>res.json())
+.then(data=>{
+
+console.log(
+'Answer History Saved'
+);
+
+});
 
 showResultPage();
 
@@ -3783,7 +4281,16 @@ padding:13px;
 </div>
 
 </div>
-
+<button
+style="
+width:100%;
+margin-top:12px;
+font-size:16px;
+background:#312e81;
+"
+onclick="showExamReview()">
+View Answer Review
+</button>
 <button
 style="
 width:100%;
@@ -3802,53 +4309,127 @@ Back To Dashboard
 
 }
 
-function previousQuestion(){
 
-let checked =
+function showExamReview(){
 
-document.querySelectorAll(
-'input[name="ans"]:checked'
-);
+let html = '';
 
-if(checked.length==1){
+html += '<div style="';
+html += 'max-width:750px;';
+html += 'margin:10px auto;';
+html += 'padding:14px;';
+html += '">';
 
-window.studentAnswers[
-window.currentQuestion
-] = checked[0].value;
+html += '<h2 style="text-align:center;color:#c4b5fd;">Answer Review</h2>';
+
+for(let i=0;i<window.examQuestions.length;i++){
+
+let q = window.examQuestions[i];
+
+let userAnswer = window.studentAnswers[i] || 'Not Answered';
+
+let correctAnswer = q.correctAnswer || '';
+
+let isCorrect =
+
+userAnswer != 'Not Answered' &&
+
+userAnswer.toUpperCase() == correctAnswer.toUpperCase();
+
+html += '<div style="';
+html += 'background:#1e293b;';
+html += 'border:1px solid ' + (isCorrect ? '#166534' : '#7f1d1d') + ';';
+html += 'border-radius:14px;';
+html += 'padding:16px;';
+html += 'margin:12px 0;';
+html += '">';
+
+html += '<div style="font-weight:bold;color:#e9d5ff;margin-bottom:10px;">';
+html += 'Q' + (i+1) + '. ' + q.question;
+html += '</div>';
+
+html += '<p style="margin:6px 0;color:#cbd5e1;">a. ' + q.optionA + '</p>';
+html += '<p style="margin:6px 0;color:#cbd5e1;">b. ' + q.optionB + '</p>';
+html += '<p style="margin:6px 0;color:#cbd5e1;">c. ' + q.optionC + '</p>';
+html += '<p style="margin:6px 0;color:#cbd5e1;">d. ' + q.optionD + '</p>';
+
+if(q.questionType == 'TRUE_FALSE'){
+
+html += '<p style="margin:6px 0;color:#cbd5e1;">e. ' + q.optionE + '</p>';
 
 }
 
-else if(checked.length>1){
+html += '<hr>';
 
-let arr=[];
+html += '<p style="margin:8px 0;">';
+html += '<b>Your Answer:</b> ';
+html += '<span style="color:' + (isCorrect ? '#86efac' : '#fca5a5') + ';">';
+html += userAnswer;
+html += '</span>';
+html += '</p>';
 
-checked.forEach(x=>{
+html += '<p style="margin:8px 0;">';
+html += '<b>Correct Answer:</b> ';
+html += '<span style="color:#86efac;">';
+html += correctAnswer;
+html += '</span>';
+html += '</p>';
 
-arr.push(x.value);
+html += '<b style="color:' + (isCorrect ? '#86efac' : '#fca5a5') + ';">';
+html += isCorrect ? '✓ Correct' : '✗ Wrong';
+html += '</b>';
+
+html += '</div>';
+
+}
+
+html += '<button style="width:100%;margin:15px 0;" onclick="showResultPage()">';
+html += 'Back To Result';
+html += '</button>';
+
+html += '</div>';
+
+document.getElementById(
+'contentArea'
+).innerHTML = html;
+
+}
+
+function previousQuestion(){
+if(
+window.currentQuestion <= 0
+){
+
+return;
+
+}
+
+let checked = document.querySelectorAll(
+'input[name="ans"]:checked'
+);
+
+let selectedAnswers = [];
+
+checked.forEach(item=>{
+
+selectedAnswers.push(item.value);
 
 });
 
+if(selectedAnswers.length > 0){
+
 window.studentAnswers[
 window.currentQuestion
-] = arr.join(',');
+] = selectedAnswers.join(',');
 
 }
 
 let previousIndex =
 window.currentQuestion - 1;
 
-if(previousIndex < 0){
-
-return;
-
-}
-
 showExamQuestion(
-
 window.examQuestions,
-
 previousIndex
-
 );
 
 }
