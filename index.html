@@ -727,13 +727,11 @@ document.getElementById('institute').value='';
 document.getElementById('batch').value='';
 document.getElementById('password').value='';
 
+showLoginForm();
+
 document.getElementById(
 'loginId'
 ).value = studentId;
-
-document.getElementById(
-'loginPassword'
-).value = '';
 
 })
 
@@ -1566,15 +1564,6 @@ Auto MCQ
 <button onclick="showTfParser()">
 Auto True/False
 </button>
-
-
-
-<br><br>
-
-<button onclick="showTfParser()">
-True / False Format
-</button>
-<br><br>
 
 <button onclick="loadQuestions()">
 View Questions
@@ -2856,7 +2845,9 @@ html += '</button>';
 
 html += '</div>';
 
-document.body.innerHTML = html;
+document.getElementById(
+'contentArea'
+).innerHTML = html;
 
 })
 
@@ -3026,7 +3017,9 @@ html += '</button>';
 
 html += '</div>';
 
-document.body.innerHTML = html;
+document.getElementById(
+'contentArea'
+).innerHTML = html;
 
 })
 
@@ -3242,6 +3235,18 @@ examName;
 
 window.examDuration =
 parseInt(duration);
+
+window.studentAnswers = [];
+
+window.timerStarted = false;
+
+if(window.examTimer){
+
+clearInterval(
+window.examTimer
+);
+
+}
 
 fetch(scriptURL,{
 
@@ -3556,7 +3561,9 @@ html += '</button>';
 }
 html += '</div>';
 
-document.body.innerHTML = html;
+document.getElementById(
+'contentArea'
+).innerHTML = html;
 
 startTimer();
 
