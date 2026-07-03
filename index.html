@@ -3193,34 +3193,10 @@ localStorage.getItem(
 
 );
 
-fetch(scriptURL,{
-
-method:'POST',
-
-body:JSON.stringify({
-
-action:'checkAttempt',
-
-studentId:
-student.id,
-
-examNo:
-examNo
-
-})
-
-})
-
-.then(res=>res.json())
-
-.then(result=>{
-
-if(result.attempted){
+if(!student){
 
 alert(
-
-'You Have Already Taken This Exam'
-
+'Please login again'
 );
 
 return;
@@ -3248,15 +3224,39 @@ window.examTimer
 
 }
 
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div style="
+text-align:center;
+padding:50px 15px;
+color:#e9d5ff;
+">
+
+<h3>Loading Exam...</h3>
+
+<p style="color:#94a3b8;">
+Please wait
+</p>
+
+</div>
+
+`;
+
 fetch(scriptURL,{
 
 method:'POST',
 
 body:JSON.stringify({
 
-action:'getQuestions',
+action:'startExamData',
 
-examNo:examNo
+studentId:
+student.id,
+
+examNo:
+examNo
 
 })
 
@@ -3264,28 +3264,71 @@ examNo:examNo
 
 .then(res=>res.json())
 
-.then(rows=>{
+.then(data=>{
 
-
-if(rows.length==0){
+if(
+data.status ==
+'ALREADY_ATTEMPTED'
+){
 
 alert(
-'No Questions Found'
+'You Have Already Taken This Exam'
 );
+
+loadStudentExams();
 
 return;
 
 }
 
-window.currentExamNo =
-examNo;
+if(
+data.status !=
+'SUCCESS'
+){
+
+alert(
+'Exam Load Failed'
+);
+
+loadStudentExams();
+
+return;
+
+}
+
+let rows =
+data.questions || [];
+
+if(
+rows.length == 0
+){
+
+alert(
+'No Questions Found'
+);
+
+loadStudentExams();
+
+return;
+
+}
 
 showExamQuestion(
 rows,
 0
 );
 
-});
+})
+
+.catch(error=>{
+
+console.log(error);
+
+alert(
+'Exam load error. Please try again.'
+);
+
+loadStudentExams();
 
 });
 
