@@ -398,11 +398,990 @@ width:100%;
 
 }
 
+/* ===== SMART MOBILE HOMEPAGE ===== */
+
+.home-page{
+max-width:1050px;
+margin:0 auto;
+padding:12px 0 30px;
+}
+
+.home-hero{
+background:
+linear-gradient(
+135deg,
+rgba(49,46,129,.96),
+rgba(30,41,59,.98)
+);
+border:1px solid #6d5bd0;
+border-radius:24px;
+padding:34px 24px;
+text-align:center;
+box-shadow:0 14px 35px rgba(0,0,0,.30);
+overflow:hidden;
+position:relative;
+}
+
+.home-hero:before{
+content:'';
+position:absolute;
+width:260px;
+height:260px;
+border-radius:50%;
+background:rgba(139,92,246,.18);
+top:-140px;
+right:-100px;
+}
+
+.home-hero:after{
+content:'';
+position:absolute;
+width:180px;
+height:180px;
+border-radius:50%;
+background:rgba(96,165,250,.10);
+bottom:-110px;
+left:-70px;
+}
+
+.home-logo{
+width:150px;
+max-width:65%;
+margin:0 auto 10px;
+display:block;
+position:relative;
+z-index:1;
+filter:drop-shadow(0 0 18px rgba(192,132,252,.55));
+}
+
+.home-badge{
+display:inline-block;
+position:relative;
+z-index:1;
+background:rgba(15,23,42,.65);
+border:1px solid rgba(196,181,253,.5);
+color:#ddd6fe;
+padding:7px 13px;
+border-radius:30px;
+font-size:13px;
+margin:5px 0 15px;
+}
+
+.home-hero h1{
+position:relative;
+z-index:1;
+font-size:42px;
+line-height:1.12;
+color:#fff;
+margin:0 0 15px;
+letter-spacing:-1px;
+}
+
+.home-hero p{
+position:relative;
+z-index:1;
+max-width:600px;
+margin:0 auto;
+color:#dbeafe;
+font-size:16px;
+line-height:1.65;
+}
+
+.home-action{
+position:relative;
+z-index:1;
+display:flex;
+gap:12px;
+justify-content:center;
+margin-top:24px;
+}
+
+.home-action button{
+min-height:52px;
+padding:13px 20px;
+font-size:16px;
+border-radius:13px;
+}
+
+.home-primary-btn{
+background:#8b5cf6;
+box-shadow:0 7px 18px rgba(76,29,149,.45);
+}
+
+.home-primary-btn:hover{
+background:#7c3aed;
+}
+
+.home-secondary-btn{
+background:#0f172a;
+border:1px solid #a78bfa;
+color:#ede9fe;
+}
+
+.home-secondary-btn:hover{
+background:#1e1b4b;
+}
+
+.home-small-text{
+font-size:12px !important;
+color:#cbd5e1 !important;
+margin-top:15px !important;
+}
+
+.home-feature-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-top:16px;
+}
+
+.home-feature-card{
+background:#1e293b;
+border:1px solid #334155;
+border-radius:17px;
+padding:18px 14px;
+text-align:center;
+box-shadow:0 6px 16px rgba(0,0,0,.16);
+}
+
+.feature-icon{
+font-size:30px;
+margin-bottom:8px;
+}
+
+.home-feature-card b{
+display:block;
+color:#f8fafc;
+font-size:16px;
+margin-bottom:6px;
+}
+
+.home-feature-card span{
+display:block;
+color:#94a3b8;
+font-size:13px;
+line-height:1.45;
+}
+
+.home-how-card{
+background:#1e293b;
+border:1px solid #334155;
+border-radius:18px;
+padding:22px 18px;
+margin-top:16px;
+box-shadow:0 6px 16px rgba(0,0,0,.16);
+}
+
+.home-how-card h2{
+text-align:center;
+font-size:21px;
+color:#e9d5ff;
+margin-bottom:18px;
+}
+
+.home-steps{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
+
+.home-steps div{
+text-align:center;
+padding:10px 5px;
+}
+
+.home-steps span{
+display:flex;
+align-items:center;
+justify-content:center;
+width:38px;
+height:38px;
+margin:0 auto 8px;
+background:#7c3aed;
+border-radius:50%;
+font-weight:bold;
+}
+
+.home-steps b{
+display:block;
+color:#f8fafc;
+font-size:14px;
+}
+
+.home-steps p{
+color:#94a3b8;
+font-size:12px;
+line-height:1.4;
+margin-top:4px;
+}
+
+.home-support-card{
+background:linear-gradient(135deg,#312e81,#1e293b);
+border:1px solid #7c3aed;
+border-radius:18px;
+padding:18px;
+margin-top:16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+box-shadow:0 6px 18px rgba(76,29,149,.22);
+}
+
+.home-support-card h3{
+color:#ede9fe;
+font-size:18px;
+margin-bottom:5px;
+}
+
+.home-support-card p{
+color:#cbd5e1;
+font-size:13px;
+line-height:1.45;
+}
+
+.home-support-card button{
+white-space:nowrap;
+min-height:46px;
+padding:10px 15px;
+background:#8b5cf6;
+}
+
+.home-footer{
+text-align:center;
+color:#94a3b8;
+font-size:13px;
+line-height:1.7;
+padding:22px 10px 0;
+}
+
+.home-footer b{
+color:#c4b5fd;
+}
+
+/* Phone screen */
+@media(max-width:768px){
+
+.home-page{
+padding:0 0 22px;
+}
+
+.home-hero{
+padding:26px 16px;
+border-radius:20px;
+}
+
+.home-logo{
+width:125px;
+}
+
+.home-badge{
+font-size:11px;
+padding:6px 10px;
+margin-bottom:13px;
+}
+
+.home-hero h1{
+font-size:31px;
+line-height:1.14;
+}
+
+.home-hero p{
+font-size:14px;
+line-height:1.6;
+}
+
+.home-action{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+margin-top:20px;
+}
+
+.home-action button{
+width:100%;
+min-height:54px;
+font-size:16px;
+}
+
+.home-feature-grid{
+grid-template-columns:1fr;
+gap:10px;
+margin-top:12px;
+}
+
+.home-feature-card{
+display:grid;
+grid-template-columns:46px 1fr;
+text-align:left;
+align-items:center;
+column-gap:12px;
+padding:14px;
+}
+
+.feature-icon{
+grid-row:span 2;
+font-size:28px;
+margin:0;
+text-align:center;
+}
+
+.home-feature-card b{
+margin:0 0 3px;
+}
+
+.home-feature-card span{
+font-size:12px;
+}
+
+.home-how-card{
+padding:18px 10px;
+margin-top:12px;
+}
+
+.home-how-card h2{
+font-size:19px;
+margin-bottom:12px;
+}
+
+.home-steps{
+gap:2px;
+}
+
+.home-steps span{
+width:34px;
+height:34px;
+font-size:14px;
+}
+
+.home-steps b{
+font-size:12px;
+}
+
+.home-steps p{
+font-size:10px;
+}
+
+.home-support-card{
+display:block;
+text-align:center;
+padding:18px 14px;
+margin-top:12px;
+}
+
+.home-support-card h3{
+font-size:17px;
+}
+
+.home-support-card button{
+width:100%;
+margin-top:12px;
+min-height:50px;
+}
+
+}
+
+/* ===== SMART STICKY TOP HEADER ===== */
+
+.smart-topbar{
+position:sticky;
+top:0;
+z-index:2000;
+width:100%;
+min-height:64px;
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 14px;
+background:rgba(15,23,42,.96);
+border-bottom:1px solid #334155;
+box-shadow:0 6px 18px rgba(0,0,0,.22);
+backdrop-filter:blur(10px);
+}
+
+.smart-topbar .menu-toggle{
+position:static;
+width:42px;
+min-width:42px;
+height:42px;
+min-height:42px;
+padding:0;
+margin:0;
+border-radius:11px;
+font-size:21px;
+background:#312e81;
+}
+
+.smart-brand{
+display:flex;
+align-items:center;
+gap:9px;
+min-width:0;
+flex:1;
+}
+
+.smart-brand img{
+width:40px;
+height:40px;
+object-fit:contain;
+filter:drop-shadow(0 0 8px rgba(167,139,250,.45));
+}
+
+.smart-brand b{
+display:block;
+color:#f5f3ff;
+font-size:16px;
+line-height:1.15;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.smart-brand span{
+display:block;
+color:#94a3b8;
+font-size:10px;
+margin-top:3px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.top-login-btn{
+width:auto;
+min-width:68px;
+min-height:38px;
+padding:8px 12px;
+margin:0;
+border-radius:10px;
+font-size:13px;
+background:#8b5cf6;
+white-space:nowrap;
+}
+
+@media(max-width:768px){
+
+.header{
+display:none;
+}
+
+.smart-topbar{
+min-height:60px;
+padding:7px 10px;
+}
+
+.smart-brand img{
+width:36px;
+height:36px;
+}
+
+.smart-brand b{
+font-size:15px;
+}
+
+.top-login-btn{
+min-width:62px;
+min-height:36px;
+padding:7px 10px;
+font-size:12px;
+}
+
+.layout{
+min-height:calc(100vh - 60px);
+}
+
+.sidebar{
+padding-top:76px;
+}
+
+}
+
+/* ===== PREMIUM POPUP ===== */
+
+#premiumPopup{
+position:fixed;
+inset:0;
+z-index:5000;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:16px;
+background:rgba(2,6,23,.78);
+backdrop-filter:blur(5px);
+}
+
+.premium-popup-box{
+position:relative;
+width:100%;
+max-width:430px;
+max-height:90vh;
+overflow-y:auto;
+background:#1e293b;
+border:1px solid #8b5cf6;
+border-radius:22px;
+padding:24px 18px;
+box-shadow:0 18px 50px rgba(0,0,0,.45);
+text-align:center;
+color:#e2e8f0;
+}
+
+.premium-close-btn{
+position:absolute;
+top:10px;
+right:10px;
+width:36px;
+min-width:36px;
+height:36px;
+min-height:36px;
+padding:0;
+margin:0;
+border-radius:50%;
+font-size:25px;
+line-height:1;
+background:#334155;
+color:#fff;
+}
+
+.premium-popup-icon{
+font-size:38px;
+margin:2px 0 7px;
+}
+
+.premium-popup-box h2{
+color:#e9d5ff;
+font-size:23px;
+margin-bottom:7px;
+}
+
+.premium-popup-sub{
+color:#cbd5e1;
+font-size:14px;
+line-height:1.5;
+}
+
+.premium-price-box{
+margin:16px 0;
+padding:12px;
+background:#312e81;
+border:1px solid #8b5cf6;
+border-radius:12px;
+color:#ddd6fe;
+font-size:16px;
+}
+
+.premium-step{
+text-align:left;
+padding:12px;
+margin-top:10px;
+background:#0f172a;
+border-radius:12px;
+border:1px solid #334155;
+}
+
+.premium-step b{
+color:#c4b5fd;
+font-size:13px;
+}
+
+.premium-step p{
+margin:5px 0 8px;
+color:#cbd5e1;
+font-size:13px;
+line-height:1.5;
+}
+
+.premium-step a{
+display:inline-block;
+color:#bbf7d0;
+font-weight:bold;
+text-decoration:none;
+font-size:14px;
+}
+
+.premium-bkash{
+padding:9px;
+background:#1e1b4b;
+border-radius:8px;
+color:#f5f3ff;
+font-size:13px;
+}
+
+.premium-whatsapp-btn{
+width:100%;
+padding:11px;
+text-align:center;
+background:#166534;
+border-radius:9px;
+}
+
+.premium-note{
+margin-top:14px;
+color:#86efac;
+font-size:12px;
+line-height:1.5;
+}
+
+@media(max-width:768px){
+
+.premium-popup-box{
+padding:22px 14px;
+border-radius:18px;
+}
+
+}
+
+/* ===== HOMEPAGE SUPPORT FOOTER ===== */
+
+.home-contact-card{
+margin-top:16px;
+padding:18px;
+display:flex;
+align-items:center;
+gap:14px;
+background:#1e293b;
+border:1px solid #334155;
+border-radius:18px;
+box-shadow:0 6px 16px rgba(0,0,0,.16);
+}
+
+.home-contact-icon{
+width:48px;
+min-width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:#312e81;
+font-size:24px;
+}
+
+.home-contact-text{
+flex:1;
+min-width:0;
+}
+
+.home-contact-text h3{
+margin:0 0 4px;
+font-size:17px;
+color:#e9d5ff;
+}
+
+.home-contact-text p{
+margin:0;
+font-size:12px;
+line-height:1.45;
+color:#94a3b8;
+}
+
+.home-contact-number{
+margin-top:7px;
+font-size:13px;
+color:#cbd5e1;
+}
+
+.home-contact-number b{
+color:#86efac;
+}
+
+.home-contact-actions{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+
+.home-contact-actions a{
+display:block;
+text-decoration:none;
+text-align:center;
+min-width:92px;
+padding:9px 10px;
+border-radius:9px;
+font-size:12px;
+font-weight:bold;
+}
+
+.home-call-btn{
+background:#334155;
+color:#f8fafc;
+}
+
+.home-whatsapp-btn{
+background:#166534;
+color:#dcfce7;
+}
+
+.home-login-shortcut{
+margin-top:14px;
+padding:13px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+background:#0f172a;
+border:1px solid #334155;
+border-radius:13px;
+color:#94a3b8;
+font-size:13px;
+}
+
+.home-login-shortcut button{
+width:auto;
+min-height:38px;
+padding:8px 13px;
+margin:0;
+font-size:13px;
+border-radius:9px;
+background:#7c3aed;
+}
+
+@media(max-width:768px){
+
+.home-contact-card{
+display:grid;
+grid-template-columns:48px 1fr;
+gap:12px;
+padding:15px;
+}
+
+.home-contact-actions{
+grid-column:1 / -1;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+}
+
+.home-contact-actions a{
+width:100%;
+padding:11px 8px;
+}
+
+.home-login-shortcut{
+flex-direction:column;
+gap:9px;
+text-align:center;
+}
+
+.home-login-shortcut button{
+width:100%;
+min-height:46px;
+}
+
+}
+
+/* ===== STUDENT SIDE: HIDE ADMIN SIDEBAR ===== */
+
+.menu-toggle{
+display:none !important;
+}
+
+.sidebar{
+display:none !important;
+}
+
+.layout{
+display:block !important;
+}
+
+.main{
+width:100% !important;
+min-width:0 !important;
+}
+
+@media(max-width:768px){
+
+.content{
+padding:14px 10px 24px !important;
+}
+
+}
+
+.home-admin-login-btn{
+background:#334155 !important;
+color:#e2e8f0 !important;
+}
+
+@media(max-width:768px){
+
+.home-login-shortcut{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+.home-login-shortcut div{
+grid-column:1 / -1;
+}
+
+.home-login-shortcut button{
+width:100%;
+min-height:48px;
+}
+
+}
+
+/* ===== MOBILE FRIENDLY STUDENT FORMS ===== */
+
+.student-form-page{
+max-width:520px;
+margin:0 auto;
+padding:8px 0 28px;
+}
+
+.student-form-card{
+background:#1e293b;
+border:1px solid #334155;
+border-radius:20px;
+padding:24px;
+box-shadow:0 10px 28px rgba(0,0,0,.25);
+}
+
+.student-form-top{
+text-align:center;
+margin-bottom:20px;
+}
+
+.student-form-logo{
+width:115px;
+height:115px;
+object-fit:contain;
+margin:0 auto 12px;
+display:block;
+filter:drop-shadow(0 0 16px rgba(167,139,250,.65));
+}
+
+.student-form-top h2{
+margin:0 0 7px;
+color:#f5f3ff;
+font-size:24px;
+}
+
+.student-form-top p{
+margin:0;
+color:#94a3b8;
+font-size:13px;
+line-height:1.5;
+}
+
+.student-form-card label{
+display:block;
+margin:14px 0 6px;
+color:#cbd5e1;
+font-size:13px;
+font-weight:bold;
+}
+
+.student-form-card input{
+width:100%;
+min-height:50px;
+margin:0;
+padding:12px 14px;
+border:1px solid #475569;
+border-radius:11px;
+background:#0f172a;
+color:#f8fafc;
+font-size:15px;
+outline:none;
+}
+
+.student-form-card input:focus{
+border-color:#a78bfa;
+box-shadow:0 0 0 3px rgba(139,92,246,.16);
+}
+
+.student-form-card input::placeholder{
+color:#64748b;
+}
+
+.student-form-main-btn,
+.student-form-secondary-btn,
+.student-form-home-btn{
+width:100%;
+min-height:52px;
+margin:14px 0 0;
+padding:12px;
+border-radius:12px;
+font-size:15px;
+}
+
+.student-form-main-btn{
+background:#8b5cf6;
+color:white;
+}
+
+.student-form-secondary-btn{
+background:#312e81;
+color:#e9d5ff;
+border:1px solid #8b5cf6;
+}
+
+.student-form-home-btn{
+background:transparent;
+color:#94a3b8;
+border:1px solid #475569;
+}
+
+@media(max-width:768px){
+
+.student-form-page{
+padding:0 0 20px;
+.student-form-logo{
+width:100px;
+height:100px;
+margin-bottom:10px;
+}
+
+}
+
+.student-form-card{
+padding:20px 15px;
+border-radius:17px;
+}
+
+.student-form-top h2{
+font-size:22px;
+}
+
+}
+
+/* ===== MOBILE FRIENDLY ADMIN LOGIN ===== */
+
+.admin-form-card{
+max-width:520px;
+}
+
+.admin-form-divider{
+display:flex;
+align-items:center;
+gap:10px;
+margin:18px 0 2px;
+color:#94a3b8;
+font-size:12px;
+text-align:center;
+}
+
+.admin-form-divider:before,
+.admin-form-divider:after{
+content:'';
+height:1px;
+background:#334155;
+flex:1;
+}
+
+@media(max-width:768px){
+
+.admin-form-card{
+padding:20px 15px;
+}
+
+}
+
 </style>
 
 </head>
 
 <body>
+
+<div class="smart-topbar">
 
 <button
 class="menu-toggle"
@@ -411,19 +1390,27 @@ aria-label="Open menu">
 ☰
 </button>
 
-<div class="header">
+<div class="smart-brand">
 
-<span class="brand-main">
-  NEXUS
-</span>
+<img
+src="logo.png"
+alt="NEXUS Logo">
 
-<br>
-
-<span class="brand-sub">
-Nursing Examination Portal
-</span>
+<div>
+<b>Nursing Exam Pro</b>
+<span>NEXUS Examination Portal</span>
+</div>
 
 </div>
+
+<button
+class="top-login-btn"
+onclick="showLoginForm()">
+Login
+</button>
+
+</div>
+
 
 <div class="layout">
 
@@ -462,34 +1449,178 @@ Admin Login
 
 <div id="contentArea" class="content">
 
-<div class="welcome-box">
+<div class="home-page">
+
+<div class="home-hero">
 
 <img
 src="logo.png"
-style="
-width:500px;
-max-width:90%;
-margin-top:-20px;
-margin-bottom:10px;
-filter:drop-shadow(0 0 25px #8b5cf6);
-">
+class="home-logo"
+alt="NEXUS Logo">
+
+<div class="home-badge">
+🩺 Smart Nursing Examination Portal
+</div>
 
 <h1>
-Welcome To NEXUS
+Prepare Smarter.<br>
+Perform Better.
 </h1>
 
-<h3>
-Nursing Examination Portal
-</h3>
-
 <p>
-Online Examination, Result Analysis,
-Student Management & Assessment System
+নার্সিং চাকরি, ভর্তি ও viva প্রস্তুতির জন্য
+একটি সহজ, দ্রুত ও professional online exam platform।
 </p>
 
-<div class="blink-text">
+<div class="home-action">
 
-✨ Smart • Secure • Professional ✨
+<button
+class="home-primary-btn"
+onclick="showRegisterForm()">
+🎓 Student Registration
+</button>
+
+<button
+class="home-secondary-btn"
+onclick="showLoginForm()">
+🔐 Student Login
+</button>
+
+</div>
+
+<p class="home-small-text">
+নতুন হলে Registration করুন, আগে account থাকলে Login করুন।
+</p>
+
+</div>
+
+<div class="home-feature-grid">
+
+<div class="home-feature-card">
+<div class="feature-icon">📝</div>
+<b>Practice Exams</b>
+<span>MCQ ও True/False exam practice</span>
+</div>
+
+<div class="home-feature-card">
+<div class="feature-icon">⏱️</div>
+<b>Timed Exam</b>
+<span>সময় ধরে real exam-এর মতো practice</span>
+</div>
+
+<div class="home-feature-card">
+<div class="feature-icon">📊</div>
+<b>Instant Result</b>
+<span>Score, percentage ও answer review</span>
+</div>
+
+</div>
+
+<div class="home-how-card">
+
+<h2>কিভাবে শুরু করবেন?</h2>
+
+<div class="home-steps">
+
+<div>
+<span>1</span>
+<b>Register</b>
+<p>নতুন account তৈরি করুন</p>
+</div>
+
+<div>
+<span>2</span>
+<b>Start Exam</b>
+<p>পছন্দের exam দিন</p>
+</div>
+
+<div>
+<span>3</span>
+<b>Review Result</b>
+<p>ভুল-সঠিক answer দেখুন</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="home-support-card">
+
+<div>
+<h3>🔓 Premium Exam Access</h3>
+<p>Advanced model test ও premium exam unlock করুন।</p>
+</div>
+
+<button onclick="showPremiumInfo()">
+Premium Details
+</button>
+
+</div>
+
+<div class="home-contact-card">
+
+<div class="home-contact-icon">
+💬
+</div>
+
+<div class="home-contact-text">
+
+<h3>Need Help?</h3>
+
+<p>
+Registration, Login অথবা Premium নিয়ে সহায়তার জন্য যোগাযোগ করুন।
+</p>
+
+<div class="home-contact-number">
+WhatsApp / Call: <b>01827276533</b>
+</div>
+
+</div>
+
+<div class="home-contact-actions">
+
+<a
+href="tel:01827276533"
+class="home-call-btn">
+📞 Call
+</a>
+
+<a
+href="https://wa.me/8801827276533"
+target="_blank"
+class="home-whatsapp-btn">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+
+<div class="home-login-shortcut">
+
+<div>
+Already registered?
+</div>
+
+<button onclick="showLoginForm()">
+🔐 Student Login
+</button>
+
+<button
+class="home-admin-login-btn"
+onclick="showAdminForm()">
+⚙️ Admin Login
+</button>
+
+</div>
+
+<div class="home-footer">
+
+<b>NEXUS Nursing Examination Portal</b><br>
+
+<span>
+Smart • Secure • Professional
+</span>
 
 </div>
 
@@ -519,35 +1650,103 @@ const scriptURL =
 
 function showRegisterForm(){
 
-document.querySelector('.sidebar').classList.remove('mobile-open');
+let sidebar = document.querySelector(
+'.sidebar'
+);
+
+if(sidebar){
+
+sidebar.classList.remove(
+'mobile-open'
+);
+
+}
 
 document.getElementById(
 'contentArea'
 ).innerHTML = `
 
-<div class="card">
+<div class="student-form-page">
 
-<h2>Student Registration</h2>
+<div class="student-form-card">
 
-<input type="text" id="name" placeholder="Full Name">
+<div class="student-form-top">
 
-<input type="text" id="phone" placeholder="Mobile Number">
+<img
+src="logo.png"
+class="student-form-logo"
+alt="NEXUS Logo">
 
-<input type="email" id="email" placeholder="Email Address">
+<h2>Create Student Account</h2>
 
-<input type="text" id="course" placeholder="Course">
+<p>
+Create your account and start your exam preparation.
+</p>
 
-<input type="text" id="institute" placeholder="Institute Name">
+</div>
 
-<input type="text" id="batch" placeholder="Batch">
+<label>Full Name (English)</label>
+<input
+type="text"
+id="name"
+placeholder="Enter your full name in English">
 
-<input type="password" id="password" placeholder="Password">
+<label>Mobile Number</label>
+<input
+type="text"
+id="phone"
+placeholder="01XXXXXXXXX">
+
+<label>Email Address</label>
+<input
+type="email"
+id="email"
+placeholder="example@email.com">
+
+<label>Course</label>
+<input
+type="text"
+id="course"
+placeholder="Example: Diploma in Nursing">
+
+<label>Institute Name (English)</label>
+<input
+type="text"
+id="institute"
+placeholder="Enter your institute name in English">
+
+<label>Batch</label>
+<input
+type="text"
+id="batch"
+placeholder="Example: 2024-2025">
+
+<label>Password</label>
+<input
+type="password"
+id="password"
+placeholder="Create a password">
 
 <button
 id="registerBtn"
+class="student-form-main-btn"
 onclick="registerStudent()">
-Register Now
+🎓 Create Account
 </button>
+
+<button
+class="student-form-secondary-btn"
+onclick="showLoginForm()">
+Already registered? Login
+</button>
+
+<button
+class="student-form-home-btn"
+onclick="showHome()">
+← Back to Home
+</button>
+
+</div>
 
 </div>
 
@@ -557,31 +1756,73 @@ Register Now
 
 function showLoginForm(){
 
-document.querySelector('.sidebar').classList.remove('mobile-open');
+let sidebar = document.querySelector(
+'.sidebar'
+);
+
+if(sidebar){
+
+sidebar.classList.remove(
+'mobile-open'
+);
+
+}
 
 document.getElementById(
 'contentArea'
 ).innerHTML = `
 
-<div class="card">
+<div class="student-form-page">
+
+<div class="student-form-card">
+
+<div class="student-form-top">
+
+<img
+src="logo.png"
+class="student-form-logo"
+alt="NEXUS Logo">
 
 <h2>Student Login</h2>
 
+<p>
+Log in using your Student ID and password.
+</p>
+
+</div>
+
+<label>Student ID</label>
 <input
 type="text"
 id="loginId"
-placeholder="Student ID">
+placeholder="Example: STD1234">
 
+<label>Password</label>
 <input
 type="password"
 id="loginPassword"
-placeholder="Password">
+placeholder="Enter your password">
 
 <button
 id="loginBtn"
+class="student-form-main-btn"
 onclick="loginStudent()">
-Login
+🔐 Login
 </button>
+
+<button
+class="student-form-secondary-btn"
+onclick="showRegisterForm()">
+New student? Register Now
+</button>
+
+<button
+class="student-form-home-btn"
+onclick="showHome()">
+← Back to Home
+</button>
+
+</div>
 
 </div>
 
@@ -589,31 +1830,186 @@ Login
 
 }
 
+
+function showHome(){
+
+window.location.reload();
+
+}
+
+
+function showPremiumInfo(){
+
+let oldPopup = document.getElementById(
+'premiumPopup'
+);
+
+if(oldPopup){
+
+oldPopup.remove();
+
+}
+
+let popup = document.createElement(
+'div'
+);
+
+popup.id = 'premiumPopup';
+
+popup.innerHTML = `
+
+<div class="premium-popup-box">
+
+<button
+class="premium-close-btn"
+onclick="closePremiumInfo()">
+×
+</button>
+
+<div class="premium-popup-icon">
+🔓
+</div>
+
+<h2>Premium Exam Access</h2>
+
+<p class="premium-popup-sub">
+Advanced model test ও সব Premium Exam unlock করুন।
+</p>
+
+<div class="premium-price-box">
+Premium Fee: <b>200 টাকা</b>
+</div>
+
+<div class="premium-step">
+
+<b>Step 1</b>
+<p>Payment করার আগে WhatsApp বা Call-এ যোগাযোগ করুন।</p>
+
+<a href="tel:01827276533">
+📞 01827276533
+</a>
+
+</div>
+
+<div class="premium-step">
+
+<b>Step 2</b>
+<p>যোগাযোগের পরে bKash Personal-এ 200 টাকা Send Money করুন।</p>
+
+<div class="premium-bkash">
+bKash Personal: <b>01827276533</b>
+</div>
+
+</div>
+
+<div class="premium-step">
+
+<b>Step 3</b>
+<p>Payment Screenshot অথবা Transaction ID এবং আপনার Student ID WhatsApp-এ পাঠান।</p>
+
+<a
+class="premium-whatsapp-btn"
+href="https://wa.me/8801827276533"
+target="_blank">
+WhatsApp Support
+</a>
+
+</div>
+
+<p class="premium-note">
+যাচাইয়ের পরে Premium activate হলে সব Paid Exam unlock হবে।
+</p>
+
+</div>
+
+`;
+
+document.body.appendChild(
+popup
+);
+
+}
+
+function closePremiumInfo(){
+
+let popup = document.getElementById(
+'premiumPopup'
+);
+
+if(popup){
+
+popup.remove();
+
+}
+
+}
+
 function showAdminForm(){
 
-document.querySelector('.sidebar').classList.remove('mobile-open');
+let sidebar = document.querySelector(
+'.sidebar'
+);
+
+if(sidebar){
+
+sidebar.classList.remove(
+'mobile-open'
+);
+
+}
 
 document.getElementById(
 'contentArea'
 ).innerHTML = `
 
-<div class="card">
+<div class="student-form-page">
+
+<div class="student-form-card admin-form-card">
+
+<div class="student-form-top">
+
+<img
+src="logo.png"
+class="student-form-logo"
+alt="NEXUS Logo">
 
 <h2>Admin Login</h2>
 
+<p>
+Enter your admin credentials to access the system.
+</p>
+
+</div>
+
+<label>Admin ID</label>
 <input
 type="text"
 id="adminId"
-placeholder="Admin ID">
+placeholder="Enter Admin ID">
 
+<label>Password</label>
 <input
 type="password"
 id="adminPassword"
-placeholder="Password">
+placeholder="Enter Password">
 
-<button onclick="adminLogin()">
-Admin Login
+<button
+class="student-form-main-btn"
+onclick="adminLogin()">
+🔐 Admin Login
 </button>
+
+<div class="admin-form-divider">
+<span>OR</span>
+</div>
+
+<button
+class="student-form-home-btn"
+onclick="showHome()">
+⌂ Back to Home
+</button>
+
+</div>
 
 </div>
 
