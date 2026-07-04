@@ -1270,7 +1270,8 @@ font-size:13px;
 font-weight:bold;
 }
 
-.student-form-card input{
+.student-form-card input,
+.student-form-card select{
 width:100%;
 min-height:50px;
 margin:0;
@@ -1283,7 +1284,8 @@ font-size:15px;
 outline:none;
 }
 
-.student-form-card input:focus{
+.student-form-card input:focus,
+.student-form-card select:focus{
 border-color:#a78bfa;
 box-shadow:0 0 0 3px rgba(139,92,246,.16);
 }
@@ -1721,6 +1723,50 @@ type="text"
 id="batch"
 placeholder="Example: 2024-2025">
 
+<label>Student Category</label>
+
+<select id="studentCategory">
+
+<option value="">Select your category</option>
+
+<option value="DNL">
+Diploma in Nursing Licensing Examinee
+</option>
+
+<option value="DML">
+Diploma in Midwifery Licensing Examinee
+</option>
+
+<option value="NJC">
+Nursing Job Candidate
+</option>
+
+<option value="N1">
+Nursing 1st Year Student
+</option>
+
+<option value="N2">
+Nursing 2nd Year Student
+</option>
+
+<option value="N3">
+Nursing 3rd Year Student
+</option>
+
+<option value="M1">
+Midwifery 1st Year Student
+</option>
+
+<option value="M2">
+Midwifery 2nd Year Student
+</option>
+
+<option value="M3">
+Midwifery 3rd Year Student
+</option>
+
+</select>
+
 <label>Password</label>
 <input
 type="password"
@@ -2017,8 +2063,6 @@ onclick="showHome()">
 
 }
 
-
-
 function registerStudent(){
 
 let name =
@@ -2039,6 +2083,11 @@ document.getElementById('institute').value.trim();
 let batch =
 document.getElementById('batch').value.trim();
 
+let category =
+document.getElementById(
+'studentCategory'
+).value.trim();
+
 let password =
 document.getElementById('password').value.trim();
 
@@ -2049,10 +2098,13 @@ if(
 !course ||
 !institute ||
 !batch ||
+!category ||
 !password
 ){
 
-alert('Please Fill All Fields');
+alert(
+'Please Fill All Fields And Select Your Category'
+);
 
 return;
 
@@ -2104,6 +2156,8 @@ institute:institute,
 
 batch:batch,
 
+category:category,
+
 password:password
 
 };
@@ -2143,6 +2197,7 @@ document.getElementById('email').value='';
 document.getElementById('course').value='';
 document.getElementById('institute').value='';
 document.getElementById('batch').value='';
+document.getElementById('studentCategory').value='';
 document.getElementById('password').value='';
 
 showLoginForm();
@@ -2160,7 +2215,7 @@ if(registerButton){
 registerButton.disabled = false;
 
 registerButton.innerHTML =
-'Register Now';
+'🎓 Create Account';
 
 registerButton.style.opacity = '1';
 
@@ -2176,6 +2231,8 @@ alert(
 });
 
 }
+
+
 
 function loginStudent(){
 
@@ -2345,7 +2402,7 @@ localStorage.setItem(
 'YES'
 );
 
-showAdminDashboard();
+showAdminCategorySelector();
 
 }else{
 
@@ -2367,6 +2424,209 @@ alert(
 
 }
 
+function showAdminCategorySelector(){
+
+let categories = [
+
+{
+code:'DNL',
+name:'Diploma Nursing Licensing',
+icon:'🩺'
+},
+
+{
+code:'DML',
+name:'Diploma Midwifery Licensing',
+icon:'🤱'
+},
+
+{
+code:'NJC',
+name:'Nursing Job Candidate',
+icon:'💼'
+},
+
+{
+code:'N1',
+name:'Nursing 1st Year',
+icon:'1️⃣'
+},
+
+{
+code:'N2',
+name:'Nursing 2nd Year',
+icon:'2️⃣'
+},
+
+{
+code:'N3',
+name:'Nursing 3rd Year',
+icon:'3️⃣'
+},
+
+{
+code:'M1',
+name:'Midwifery 1st Year',
+icon:'1️⃣'
+},
+
+{
+code:'M2',
+name:'Midwifery 2nd Year',
+icon:'2️⃣'
+},
+
+{
+code:'M3',
+name:'Midwifery 3rd Year',
+icon:'3️⃣'
+}
+
+];
+
+let html = `
+
+<div style="
+max-width:900px;
+margin:20px auto;
+padding:16px;
+">
+
+<div style="
+text-align:center;
+margin-bottom:22px;
+">
+
+<img
+src="logo.png"
+style="
+width:130px;
+height:130px;
+object-fit:contain;
+margin-bottom:14px;
+">
+
+<h2 style="
+margin:0;
+color:#c4b5fd;
+">
+
+Select Working Category
+
+</h2>
+
+<p style="
+color:#94a3b8;
+margin:8px 0 0;
+font-size:14px;
+">
+
+Choose a category to manage students, exams, questions and results.
+
+</p>
+
+</div>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+">
+
+`;
+
+categories.forEach(cat=>{
+
+html += `
+
+<button
+onclick="openAdminCategory('${cat.code}','${cat.name}')"
+style="
+min-height:120px;
+padding:14px 10px;
+border-radius:16px;
+background:#1e293b;
+border:1px solid #334155;
+color:#f8fafc;
+font-size:15px;
+font-weight:bold;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:9px;
+">
+
+<span style="font-size:30px;">
+${cat.icon}
+</span>
+
+<span>
+${cat.name}
+</span>
+
+</button>
+
+`;
+
+});
+
+html += `
+
+</div>
+
+<button
+onclick="adminLogout()"
+style="
+display:block;
+margin:22px auto 0;
+min-width:160px;
+min-height:46px;
+background:#7f1d1d;
+border-radius:12px;
+">
+
+Logout Admin
+
+</button>
+
+</div>
+
+`;
+
+document.getElementById(
+'contentArea'
+).innerHTML = html;
+
+}
+
+function openAdminCategory(
+categoryCode,
+categoryName
+){
+
+window.adminCategory =
+categoryCode;
+
+window.adminCategoryName =
+categoryName;
+
+localStorage.setItem(
+'adminCategory',
+categoryCode
+);
+
+localStorage.setItem(
+'adminCategoryName',
+categoryName
+);
+
+showAdminDashboard();
+
+}
+
+
+
 function logoutAdmin(){
 
 localStorage.removeItem(
@@ -2379,13 +2639,25 @@ location.reload();
 
 function loadStudents(){
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 fetch(scriptURL,{
 
 method:'POST',
 
 body:JSON.stringify({
 
-action:'getStudents'
+action:'getStudents',
+
+studentCategory:studentCategory
 
 })
 
@@ -2397,7 +2669,25 @@ action:'getStudents'
 
 let html='';
 
-html += '<h3>Student List</h3>';
+html += '<h3 style="text-align:center;color:#c4b5fd;">Student List</h3>';
+
+html += '<p style="text-align:center;color:#94a3b8;">';
+
+html += 'Showing students for: ';
+
+html += '<b style="color:#e9d5ff;">';
+
+html += window.adminCategoryName ||
+
+localStorage.getItem(
+'adminCategoryName'
+) ||
+
+'Diploma Nursing Licensing';
+
+html += '</b>';
+
+html += '</p>';
 
 html += '<table border="1" width="100%">';
 
@@ -2677,11 +2967,69 @@ loadStudents();
 
 function showCreateExamForm(){
 
+let categoryCode =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
+let categoryName =
+
+window.adminCategoryName ||
+
+localStorage.getItem(
+'adminCategoryName'
+) ||
+
+'Diploma Nursing Licensing';
+
 document.getElementById(
 'studentArea'
 ).innerHTML = `
 
-<h3>Create Exam</h3>
+<div style="
+max-width:650px;
+margin:0 auto;
+background:#1e293b;
+border:1px solid #334155;
+border-radius:18px;
+padding:18px;
+">
+
+<div style="
+background:#0f172a;
+border:1px solid #4c1d95;
+border-radius:12px;
+padding:12px;
+margin-bottom:16px;
+">
+
+<div style="
+font-size:12px;
+color:#94a3b8;
+">
+CREATING EXAM FOR
+</div>
+
+<b style="
+color:#c4b5fd;
+font-size:16px;
+">
+${categoryName}
+</b>
+
+</div>
+
+<h3 style="
+margin:0 0 16px;
+color:#f8fafc;
+">
+Create Exam
+</h3>
 
 <input
 type="text"
@@ -2708,6 +3056,14 @@ type="number"
 id="duration"
 placeholder="Duration (Minutes)">
 
+<label style="
+display:block;
+margin-top:12px;
+color:#cbd5e1;
+">
+Exam Access Type
+</label>
+
 <select id="examCategory">
 
 <option value="FREE">
@@ -2720,14 +3076,33 @@ PAID Exam
 
 </select>
 
-<button onclick="createExam()">
+<button
+onclick="createExam()"
+style="
+width:100%;
+min-height:52px;
+margin-top:18px;
+font-size:16px;
+border-radius:12px;
+">
 Save Exam
 </button>
-<br><br>
 
-<button onclick="loadExams()">
+<button
+onclick="loadExams()"
+style="
+width:100%;
+min-height:48px;
+margin-top:10px;
+font-size:15px;
+border-radius:12px;
+background:#334155;
+">
 View Exams
 </button>
+
+</div>
+
 `;
 
 }
@@ -2765,6 +3140,16 @@ document.getElementById(
 'examCategory'
 ).value;
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 if(
 
 !examNo ||
@@ -2787,6 +3172,26 @@ return;
 
 }
 
+let saveButton =
+event ?
+event.target :
+null;
+
+if(saveButton){
+
+saveButton.disabled = true;
+
+saveButton.innerHTML =
+'Saving... Please Wait';
+
+saveButton.style.opacity =
+'.7';
+
+saveButton.style.cursor =
+'not-allowed';
+
+}
+
 fetch(scriptURL,{
 
 method:'POST',
@@ -2805,7 +3210,9 @@ totalMark:totalMark,
 
 duration:duration,
 
-examCategory:examCategory
+examCategory:examCategory,
+
+studentCategory:studentCategory
 
 })
 
@@ -2815,12 +3222,6 @@ examCategory:examCategory
 
 .then(data=>{
 
-console.log(data);
-
-alert(
-JSON.stringify(data)
-);
-
 if(data.status=='SUCCESS'){
 
 alert(
@@ -2829,6 +3230,27 @@ alert(
 
 showCreateExamForm();
 
+}else{
+
+if(saveButton){
+
+saveButton.disabled = false;
+
+saveButton.innerHTML =
+'Save Exam';
+
+saveButton.style.opacity =
+'1';
+
+saveButton.style.cursor =
+'pointer';
+
+}
+
+alert(
+'Could Not Create Exam'
+);
+
 }
 
 })
@@ -2836,6 +3258,21 @@ showCreateExamForm();
 .catch(error=>{
 
 console.log(error);
+
+if(saveButton){
+
+saveButton.disabled = false;
+
+saveButton.innerHTML =
+'Save Exam';
+
+saveButton.style.opacity =
+'1';
+
+saveButton.style.cursor =
+'pointer';
+
+}
 
 alert(
 'ERROR : ' + error
@@ -2847,13 +3284,25 @@ alert(
 
 function loadExams(){
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 fetch(scriptURL,{
 
 method:'POST',
 
 body:JSON.stringify({
 
-action:'getExams'
+action:'getExams',
+
+studentCategory:studentCategory
 
 })
 
@@ -2865,9 +3314,34 @@ action:'getExams'
 
 let html='';
 
-html += '<h3>Exam List</h3>';
+html += '<div style="max-width:1000px;margin:0 auto;">';
 
-html += '<table border="1" width="100%">';
+html += '<h3 style="color:#c4b5fd;text-align:center;">Exam List</h3>';
+
+html += '<p style="text-align:center;color:#94a3b8;">';
+html += 'Showing exams for: ';
+html += '<b style="color:#e9d5ff;">';
+html += window.adminCategoryName || localStorage.getItem('adminCategoryName') || 'Diploma Nursing Licensing';
+html += '</b>';
+html += '</p>';
+
+if(!rows || rows.length==0){
+
+html += '<div style="padding:22px;text-align:center;background:#1e293b;border:1px solid #334155;border-radius:14px;color:#94a3b8;">';
+html += 'No exams found in this category.';
+html += '</div>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html + '</div>';
+
+return;
+
+}
+
+html += '<div style="overflow-x:auto;">';
+
+html += '<table border="1" width="100%" style="min-width:760px;border-collapse:collapse;">';
 
 html += '<tr>';
 
@@ -2884,7 +3358,9 @@ html += '<th>Marks</th>';
 html += '<th>Duration</th>';
 
 html += '<th>Status</th>';
-html += '<th>Category</th>';
+
+html += '<th>Access</th>';
+
 html += '<th>Action</th>';
 
 html += '</tr>';
@@ -2906,7 +3382,9 @@ html += '<td>'+r.totalMark+'</td>';
 html += '<td>'+r.duration+'</td>';
 
 html += '<td>'+r.status+'</td>';
+
 html += '<td>'+r.examCategory+'</td>';
+
 html += '<td>';
 
 html += '<button onclick="deleteExam(\''+r.examNo+'\')">Delete</button>';
@@ -2916,6 +3394,16 @@ html += '</td>';
 html += '</tr>';
 
 });
+
+html += '</table>';
+
+html += '</div>';
+
+html += '</div>';
+
+document.getElementById(
+'studentArea'
+).innerHTML = html;
 
 setTimeout(()=>{
 
@@ -2929,7 +3417,9 @@ body:JSON.stringify({
 
 action:'getExamQuestionCount',
 
-examNo:r.examNo
+examNo:r.examNo,
+
+studentCategory:studentCategory
 
 })
 
@@ -2955,15 +3445,28 @@ cell.innerHTML = data.count;
 
 },300);
 
-html += '</table>';
+})
+
+.catch(()=>{
 
 document.getElementById(
 'studentArea'
-).innerHTML = html;
+).innerHTML = `
+
+<div style="
+padding:22px;
+text-align:center;
+color:#fecaca;
+">
+Could not load exams.
+</div>
+
+`;
 
 });
 
 }
+
 
 function deleteExam(examNo){
 
@@ -3154,6 +3657,7 @@ Save True/False
 
 }
 
+
 function saveTrueFalseQuestion(){
 
 let examNo =
@@ -3195,6 +3699,16 @@ let correctAnswer =
 document.getElementById(
 'tfAnswer'
 ).value.trim();
+
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
 
 if(
 
@@ -3248,7 +3762,9 @@ optionD:optionD,
 
 optionE:optionE,
 
-correctAnswer:correctAnswer
+correctAnswer:correctAnswer,
+
+studentCategory:studentCategory
 
 })
 
@@ -3471,6 +3987,16 @@ return;
 
 }
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 fetch(scriptURL,{
 
 method:'POST',
@@ -3495,7 +4021,9 @@ optionD:optionD,
 
 optionE:'',
 
-correctAnswer:answer
+correctAnswer:answer,
+
+studentCategory:studentCategory
 
 })
 
@@ -3512,6 +4040,7 @@ alert(
 );
 
 showMcqParser();
+
 }
 
 });
@@ -3715,6 +4244,16 @@ return;
 
 }
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 fetch(scriptURL,{
 
 method:'POST',
@@ -3739,7 +4278,9 @@ optionD:optionD,
 
 optionE:optionE,
 
-correctAnswer:answer
+correctAnswer:answer,
+
+studentCategory:studentCategory
 
 })
 
@@ -3800,6 +4341,16 @@ document.getElementById(
 'correctAnswer'
 ).value.trim();
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 if(
 
 !examNo ||
@@ -3847,7 +4398,9 @@ optionC:optionC,
 
 optionD:optionD,
 optionE:'',
-correctAnswer:correctAnswer
+correctAnswer:correctAnswer,
+
+studentCategory:studentCategory
 
 })
 
@@ -3873,13 +4426,25 @@ showQuestionBank();
 
 function loadQuestions(){
 
+let studentCategory =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
 fetch(scriptURL,{
 
 method:'POST',
 
 body:JSON.stringify({
 
-action:'getAllQuestions'
+action:'getAllQuestions',
+
+studentCategory:studentCategory
 
 })
 
@@ -4043,6 +4608,32 @@ document.getElementById(
 
 function showAdminDashboard(){
 
+let categoryCode =
+
+window.adminCategory ||
+
+localStorage.getItem(
+'adminCategory'
+) ||
+
+'DNL';
+
+let categoryName =
+
+window.adminCategoryName ||
+
+localStorage.getItem(
+'adminCategoryName'
+) ||
+
+'Diploma Nursing Licensing';
+
+window.adminCategory =
+categoryCode;
+
+window.adminCategoryName =
+categoryName;
+
 fetch(scriptURL,{
 
 method:'POST',
@@ -4064,78 +4655,202 @@ document.getElementById(
 ).innerHTML = `
 
 <div style="
-padding:20px;
+max-width:1100px;
+margin:auto;
+padding:16px;
 ">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+margin-bottom:18px;
+padding:14px 16px;
+background:#1e293b;
+border:1px solid #334155;
+border-radius:16px;
+">
+
+<div>
+
+<div style="
+font-size:12px;
+color:#94a3b8;
+margin-bottom:4px;
+">
+CURRENT WORKING CATEGORY
+</div>
+
+<div style="
+font-size:18px;
+font-weight:bold;
+color:#c4b5fd;
+">
+${categoryName}
+</div>
+
+</div>
+
+<button
+onclick="showAdminCategorySelector()"
+style="
+min-height:42px;
+padding:9px 14px;
+border-radius:10px;
+background:#312e81;
+color:#e9d5ff;
+">
+← Change Category
+</button>
+
+</div>
 
 <h1 style="
 color:#8b5cf6;
 text-align:center;
-margin-bottom:30px;
+margin:0 0 22px;
+font-size:26px;
 ">
-Admin Dashboard
+Admin Control Panel
 </h1>
 
 <div style="
 display:grid;
-grid-template-columns:
-repeat(4,1fr);
-gap:20px;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+max-width:760px;
+margin:0 auto;
 ">
 
-<div class="card">
-<h2>${stats.students}</h2>
-<p>Total Students</p>
+<div class="card" style="
+padding:12px 8px;
+min-height:105px;
+border-radius:14px;
+text-align:center;
+">
+<h2 style="margin:0 0 6px;font-size:26px;">
+${stats.students}
+</h2>
+<p style="margin:0;font-size:13px;">
+Total Students
+</p>
 </div>
 
-<div class="card">
-<h2>${stats.exams}</h2>
-<p>Total Exams</p>
+<div class="card" style="
+padding:12px 8px;
+min-height:105px;
+border-radius:14px;
+text-align:center;
+">
+<h2 style="margin:0 0 6px;font-size:26px;">
+${stats.exams}
+</h2>
+<p style="margin:0;font-size:13px;">
+Total Exams
+</p>
 </div>
 
-<div class="card">
-<h2>${stats.questions}</h2>
-<p>Total Questions</p>
+<div class="card" style="
+padding:12px 8px;
+min-height:105px;
+border-radius:14px;
+text-align:center;
+">
+<h2 style="margin:0 0 6px;font-size:26px;">
+${stats.questions}
+</h2>
+<p style="margin:0;font-size:13px;">
+Total Questions
+</p>
 </div>
 
-<div class="card">
-<h2>${stats.results}</h2>
-<p>Total Results</p>
+<div class="card" style="
+padding:12px 8px;
+min-height:105px;
+border-radius:14px;
+text-align:center;
+">
+<h2 style="margin:0 0 6px;font-size:26px;">
+${stats.results}
+</h2>
+<p style="margin:0;font-size:13px;">
+Total Results
+</p>
 </div>
-
 </div>
-
-<br><br>
 
 <div style="
 display:flex;
 gap:10px;
 justify-content:center;
 flex-wrap:wrap;
+margin:22px 0 14px;
 ">
 
-<button onclick="loadStudents()">
+<button
+onclick="loadStudents()"
+style="
+min-width:130px;
+min-height:56px;
+padding:12px 18px;
+font-size:16px;
+border-radius:14px;
+">
 Students
 </button>
 
-<button onclick="showCreateExamForm()">
+<button
+onclick="showCreateExamForm()"
+style="
+min-width:130px;
+min-height:56px;
+padding:12px 18px;
+font-size:16px;
+border-radius:14px;
+">
 Exams
 </button>
 
-<button onclick="showQuestionBank()">
+<button
+onclick="showQuestionBank()"
+style="
+min-width:130px;
+min-height:56px;
+padding:12px 18px;
+font-size:16px;
+border-radius:14px;
+">
 Questions
 </button>
 
-<button onclick="showResults()">
+<button
+onclick="showResults()"
+style="
+min-width:130px;
+min-height:56px;
+padding:12px 18px;
+font-size:16px;
+border-radius:14px;
+">
 Results
 </button>
 
-<button onclick="logoutAdmin()">
+<button
+onclick="logoutAdmin()"
+style="
+min-width:130px;
+min-height:56px;
+padding:12px 18px;
+font-size:16px;
+border-radius:14px;
+background:#7f1d1d;
+">
 Logout
 </button>
 
 </div>
-
-<br>
 
 <div id="studentArea"></div>
 
@@ -4143,7 +4858,28 @@ Logout
 
 `;
 
+})
+
+.catch(()=>{
+
+document.getElementById(
+'contentArea'
+).innerHTML = `
+
+<div style="
+padding:30px;
+text-align:center;
+color:#fecaca;
+">
+
+Could not load admin dashboard.
+
+</div>
+
+`;
+
 });
+
 }
 
 function showStudentDashboard(){
@@ -4173,6 +4909,35 @@ let accountColor =
 student.premiumStatus == 'PAID'
 ? '#86efac'
 : '#fcd34d';
+
+let categoryNames = {
+
+DNL:'Diploma in Nursing Licensing',
+
+DML:'Diploma in Midwifery Licensing',
+
+NJC:'Nursing Job Candidate',
+
+N1:'Nursing 1st Year',
+
+N2:'Nursing 2nd Year',
+
+N3:'Nursing 3rd Year',
+
+M1:'Midwifery 1st Year',
+
+M2:'Midwifery 2nd Year',
+
+M3:'Midwifery 3rd Year'
+
+};
+
+let categoryCode =
+student.category || 'DNL';
+
+let categoryName =
+categoryNames[categoryCode] ||
+'Diploma in Nursing Licensing';
 
 document.getElementById(
 'contentArea'
@@ -4306,6 +5071,11 @@ color:#e2e8f0;
 font-size:14px;
 line-height:1.9;
 ">
+
+<div>
+<span style="color:#94a3b8;">Student Category:</span>
+<b style="color:#c4b5fd;">${categoryName}</b>
+</div>
 
 <div>
 <span style="color:#94a3b8;">Course:</span>
@@ -4767,13 +5537,43 @@ let student = JSON.parse(
 localStorage.getItem('studentData')
 );
 
+let studentCategory =
+student.category || 'DNL';
+
+let categoryNames = {
+
+DNL:'Diploma in Nursing Licensing',
+
+DML:'Diploma in Midwifery Licensing',
+
+NJC:'Nursing Job Candidate',
+
+N1:'Nursing 1st Year',
+
+N2:'Nursing 2nd Year',
+
+N3:'Nursing 3rd Year',
+
+M1:'Midwifery 1st Year',
+
+M2:'Midwifery 2nd Year',
+
+M3:'Midwifery 3rd Year'
+
+};
+
 fetch(scriptURL,{
 
 method:'POST',
 
 body:JSON.stringify({
 
-action:'getExams'
+action:'getExams',
+
+studentCategory:
+student.studentCategory ||
+student.category ||
+'DNL'
 
 })
 
@@ -4783,9 +5583,25 @@ action:'getExams'
 
 .then(rows=>{
 
+let filteredRows = rows.filter(r=>{
+
+let examStudentCategory =
+r.studentCategory || 'DNL';
+
+return examStudentCategory == studentCategory;
+
+});
+
 let html='';
 
 html += '<h3 style="text-align:center;color:#c4b5fd;">Available Exams</h3>';
+
+html += '<p style="text-align:center;color:#94a3b8;margin-bottom:4px;">';
+html += 'Category: ';
+html += '<b style="color:#c4b5fd;">';
+html += categoryNames[studentCategory] || studentCategory;
+html += '</b>';
+html += '</p>';
 
 html += '<p style="text-align:center;color:#94a3b8;">';
 html += 'Account Type: ';
@@ -4796,7 +5612,29 @@ html += student.premiumStatus || 'FREE';
 html += '</b>';
 html += '</p>';
 
-rows.forEach(r=>{
+if(filteredRows.length == 0){
+
+html += '<div style="';
+html += 'background:#1e293b;';
+html += 'border:1px solid #334155;';
+html += 'border-radius:16px;';
+html += 'padding:22px 16px;';
+html += 'text-align:center;';
+html += 'color:#cbd5e1;';
+html += 'margin-top:14px;';
+html += '">';
+
+html += '<div style="font-size:32px;margin-bottom:8px;">📝</div>';
+html += '<b style="color:#e9d5ff;">No Exam Available Yet</b>';
+html += '<p style="font-size:13px;margin:8px 0 0;">';
+html += 'No exam has been added for your category yet.';
+html += '</p>';
+
+html += '</div>';
+
+}
+
+filteredRows.forEach(r=>{
 
 let isPaidExam = r.examCategory == 'PAID';
 
@@ -4855,7 +5693,7 @@ html += '🔒 Premium Required';
 html += '</button>';
 
 html += '<button onclick="showPremiumInfo()" style="margin-left:8px;">';
-html += 'How to Unlock Premium?';
+html += 'Premium Details';
 html += '</button>';
 
 }
@@ -4881,17 +5719,9 @@ html += '<h3 style="margin:0 0 10px;color:#c4b5fd;">🔓 Unlock All Premium Exam
 
 html += '<p style="margin:6px 0;"><b>Premium Fee:</b> 200 টাকা</p>';
 
-html += '<p style="margin:6px 0;color:#fcd34d;"><b>Step 1:</b> Payment করার আগে WhatsApp-এ যোগাযোগ করুন।</p>';
-
-html += '<p style="margin:6px 0;">WhatsApp / Call: <b>01827276533</b></p>';
-
-html += '<p style="margin:6px 0;"><b>Step 2:</b> যোগাযোগের পরে bKash Personal-এ 200 টাকা Send Money করুন।</p>';
-
-html += '<p style="margin:6px 0;">bKash Personal: <b>01827276533</b></p>';
-
-html += '<p style="margin:6px 0;"><b>Step 3:</b> Payment Screenshot অথবা Transaction ID এবং আপনার Student ID WhatsApp-এ পাঠান।</p>';
-
-html += '<p style="margin:8px 0 0;color:#86efac;"><b>Step 4:</b> যাচাইয়ের পরে Premium activate হলে সব Paid Exam unlock হবে।</p>';
+html += '<button onclick="showPremiumInfo()" style="margin-top:8px;">';
+html += 'View Premium Details';
+html += '</button>';
 
 html += '</div>';
 
@@ -4900,6 +5730,30 @@ html += '</div>';
 document.getElementById(
 'examArea'
 ).innerHTML = html;
+
+})
+
+.catch(()=>{
+
+document.getElementById(
+'examArea'
+).innerHTML = `
+
+<div style="
+background:#1e293b;
+border:1px solid #7f1d1d;
+border-radius:16px;
+padding:18px;
+text-align:center;
+color:#fecaca;
+margin-top:14px;
+">
+
+Could not load exams. Please try again.
+
+</div>
+
+`;
 
 });
 
@@ -5928,6 +6782,10 @@ percentage,
 
 totalMark:
 total,
+
+studentCategory:
+student.category ||
+'DNL',
 
 answers:
 answerHistoryList
