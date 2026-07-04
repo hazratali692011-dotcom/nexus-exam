@@ -545,7 +545,9 @@ document.getElementById(
 
 <input type="password" id="password" placeholder="Password">
 
-<button onclick="registerStudent()">
+<button
+id="registerBtn"
+onclick="registerStudent()">
 Register Now
 </button>
 
@@ -577,7 +579,9 @@ type="password"
 id="loginPassword"
 placeholder="Password">
 
-<button onclick="loginStudent()">
+<button
+id="loginBtn"
+onclick="loginStudent()">
 Login
 </button>
 
@@ -670,8 +674,8 @@ Date.now()
 
 let registerButton =
 
-document.querySelector(
-'button[onclick="registerStudent()"]'
+document.getElementById(
+'registerBtn'
 );
 
 if(registerButton){
@@ -801,8 +805,8 @@ return;
 
 let loginButton =
 
-document.querySelector(
-'button[onclick="loginStudent()"]'
+document.getElementById(
+'loginBtn'
 );
 
 if(loginButton){
@@ -2749,23 +2753,32 @@ Logout
 }
 
 function showStudentDashboard(){
+
 if(
 !localStorage.getItem(
 'studentData'
 )
 ){
+
 return;
+
 }
 
-let student =
-
-JSON.parse(
-
+let student = JSON.parse(
 localStorage.getItem(
 'studentData'
 )
-
 );
+
+let accountType =
+student.premiumStatus == 'PAID'
+? 'PREMIUM'
+: 'FREE';
+
+let accountColor =
+student.premiumStatus == 'PAID'
+? '#86efac'
+: '#fcd34d';
 
 document.getElementById(
 'contentArea'
@@ -2773,58 +2786,199 @@ document.getElementById(
 
 <div style="
 max-width:700px;
-margin:40px auto;
-background:#1e293b;
-padding:30px;
-border-radius:20px;
-box-shadow:0 0 30px rgba(139,92,246,.3);
+margin:18px auto;
+padding:14px;
 ">
-
-<h1 style="
-text-align:center;
-color:#8b5cf6;
-margin-bottom:20px;
-">
-Welcome ${student.name}
-</h1>
-
-<p><b>Student ID:</b> ${student.id}</p>
-
-<p><b>Course:</b> ${student.course}</p>
-
-<p><b>Institute:</b> ${student.institute}</p>
-
-<p><b>Batch:</b> ${student.batch}</p>
-
-<p>
-<b>Account Type:</b>
-<span style="
-color:${student.premiumStatus=='PAID' ? '#86efac' : '#fcd34d'};
-font-weight:bold;
-">
-${student.premiumStatus || 'FREE'}
-</span>
-</p>
-
-<br>
 
 <div style="
-display:flex;
-gap:10px;
-justify-content:center;
-flex-wrap:wrap;
+background:#1e293b;
+border:1px solid #334155;
+padding:20px;
+border-radius:20px;
+box-shadow:0 8px 24px rgba(0,0,0,.25);
 ">
 
-<button onclick="loadStudentExams()">
+<div style="
+text-align:center;
+margin-bottom:18px;
+">
+
+<div style="
+width:72px;
+height:72px;
+margin:auto;
+border-radius:50%;
+background:#7c3aed;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+font-weight:bold;
+">
+
+${(student.name || 'S').charAt(0).toUpperCase()}
+
+</div>
+
+<h2 style="
+color:#f8fafc;
+margin:12px 0 5px;
+font-size:22px;
+">
+
+Welcome, ${student.name}
+
+</h2>
+
+<p style="
+color:#94a3b8;
+margin:0;
+font-size:13px;
+">
+
+Student ID: ${student.id}
+
+</p>
+
+</div>
+
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+">
+
+<div style="
+background:#0f172a;
+padding:12px;
+border-radius:12px;
+">
+
+<div style="
+font-size:12px;
+color:#94a3b8;
+">
+
+Account Type
+
+</div>
+
+<b style="
+color:${accountColor};
+font-size:15px;
+">
+
+${accountType}
+
+</b>
+
+</div>
+
+<div style="
+background:#0f172a;
+padding:12px;
+border-radius:12px;
+">
+
+<div style="
+font-size:12px;
+color:#94a3b8;
+">
+
+Batch
+
+</div>
+
+<b style="
+color:#e2e8f0;
+font-size:15px;
+">
+
+${student.batch || '-'}
+
+</b>
+
+</div>
+
+</div>
+
+<div style="
+background:#0f172a;
+padding:14px;
+border-radius:12px;
+margin-top:10px;
+color:#e2e8f0;
+font-size:14px;
+line-height:1.9;
+">
+
+<div>
+<span style="color:#94a3b8;">Course:</span>
+${student.course || '-'}
+</div>
+
+<div>
+<span style="color:#94a3b8;">Institute:</span>
+${student.institute || '-'}
+</div>
+
+</div>
+
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:16px;
+">
+
+<button
+onclick="loadStudentExams()"
+style="
+min-height:54px;
+font-size:15px;
+border-radius:12px;
+">
+
 Available Exams
+
 </button>
 
-<button onclick="loadMyResults()">
+<button
+onclick="loadMyResults()"
+style="
+min-height:54px;
+font-size:15px;
+border-radius:12px;
+">
+
 My Results
+
 </button>
 
-<button onclick="logoutStudent()">
+<button
+onclick="showStudentProfile()"
+style="
+min-height:54px;
+font-size:15px;
+border-radius:12px;
+">
+
+My Profile
+
+</button>
+
+<button
+onclick="logoutStudent()"
+style="
+min-height:54px;
+font-size:15px;
+border-radius:12px;
+background:#7f1d1d;
+">
+
 Logout
+
 </button>
 
 </div>
@@ -2833,7 +2987,107 @@ Logout
 
 </div>
 
+</div>
+
 `;
+
+}
+
+function showStudentProfile(){
+
+let student = JSON.parse(
+localStorage.getItem(
+'studentData'
+)
+);
+
+if(!student){
+
+alert(
+'Please login again'
+);
+
+showLoginForm();
+
+return;
+
+}
+
+let accountType =
+student.premiumStatus == 'PAID'
+? 'PREMIUM'
+: 'FREE';
+
+let accountColor =
+student.premiumStatus == 'PAID'
+? '#86efac'
+: '#fcd34d';
+
+let html='';
+
+html += '<div style="max-width:650px;margin:auto;padding:14px;">';
+
+html += '<h2 style="text-align:center;color:#e9d5ff;margin:8px 0 18px;">';
+html += 'My Profile';
+html += '</h2>';
+
+html += '<div style="background:#1e293b;border:1px solid #334155;border-radius:18px;padding:20px;box-shadow:0 8px 22px rgba(0,0,0,.22);">';
+
+html += '<div style="text-align:center;margin-bottom:18px;">';
+
+html += '<div style="width:70px;height:70px;margin:auto;border-radius:50%;background:#7c3aed;color:white;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;">';
+html += (student.name || 'S')
+.charAt(0)
+.toUpperCase();
+html += '</div>';
+
+html += '<h3 style="margin:10px 0 4px;color:#f8fafc;">';
+html += student.name || '-';
+html += '</h3>';
+
+html += '<p style="margin:0;color:#94a3b8;font-size:13px;">';
+html += 'Student ID: ' + (student.id || '-');
+html += '</p>';
+
+html += '</div>';
+
+html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">';
+
+html += '<div style="background:#0f172a;border-radius:12px;padding:12px;">';
+html += '<div style="font-size:12px;color:#94a3b8;">Account Type</div>';
+html += '<b style="color:' + accountColor + ';">' + accountType + '</b>';
+html += '</div>';
+
+html += '<div style="background:#0f172a;border-radius:12px;padding:12px;">';
+html += '<div style="font-size:12px;color:#94a3b8;">Batch</div>';
+html += '<b style="color:#e2e8f0;">' + (student.batch || '-') + '</b>';
+html += '</div>';
+
+html += '</div>';
+
+html += '<div style="margin-top:12px;background:#0f172a;border-radius:12px;padding:14px;color:#e2e8f0;line-height:1.9;font-size:14px;">';
+
+html += '<div><span style="color:#94a3b8;">Phone:</span> ' + (student.phone || '-') + '</div>';
+
+html += '<div><span style="color:#94a3b8;">Email:</span> ' + (student.email || '-') + '</div>';
+
+html += '<div><span style="color:#94a3b8;">Course:</span> ' + (student.course || '-') + '</div>';
+
+html += '<div><span style="color:#94a3b8;">Institute:</span> ' + (student.institute || '-') + '</div>';
+
+html += '</div>';
+
+html += '<button onclick="showStudentDashboard()" style="width:100%;margin-top:18px;padding:14px;font-size:16px;border-radius:12px;">';
+html += '← Back to Dashboard';
+html += '</button>';
+
+html += '</div>';
+
+html += '</div>';
+
+document.getElementById(
+'contentArea'
+).innerHTML = html;
 
 }
 
@@ -3195,7 +3449,7 @@ html += '</p>';
 
 if(canStart){
 
-html += '<button onclick="startExam(\'' + r.examNo + '\',\'' + r.examName.replace(/'/g,"\\'") + '\',\'' + r.duration + '\')">';
+html += '<button onclick="startExam(\'' + r.examNo + '\',\'' + r.examName.replace(/'/g,"\\'") + '\',\'' + r.duration + '\', this)">';
 
 html += 'Start Exam';
 html += '</button>';
@@ -3260,7 +3514,8 @@ document.getElementById(
 function startExam(
 examNo,
 examName,
-duration
+duration,
+clickedButton
 ){
 
 let student =
@@ -3282,6 +3537,31 @@ alert(
 return;
 
 }
+
+let startButtons =
+
+document.querySelectorAll(
+'button[onclick^="startExam("]'
+);
+
+startButtons.forEach(button=>{
+
+button.disabled = true;
+
+button.style.opacity = '.7';
+
+button.style.cursor =
+'not-allowed';
+
+});
+
+if(clickedButton){
+
+clickedButton.innerHTML =
+'Loading... Please Wait';
+
+}
+
 
 window.currentExamNo =
 examNo;
@@ -3403,6 +3683,16 @@ rows,
 .catch(error=>{
 
 console.log(error);
+startButtons.forEach(button=>{
+
+button.disabled = false;
+
+button.style.opacity = '1';
+
+button.style.cursor =
+'pointer';
+
+});
 
 alert(
 'Exam load error. Please try again.'
